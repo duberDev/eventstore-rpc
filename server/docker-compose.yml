@@ -1,0 +1,74 @@
+version: '2'
+services:
+  eventstore1:
+    image: eventstore/eventstore
+    environment:
+      - EVENTSTORE_INT_IP=172.31.0.11
+      - EVENTSTORE_EXT_IP=172.31.0.11
+      - EVENTSTORE_CLUSTER_SIZE=3
+      - EVENTSTORE_DISCOVER_VIA_DNS=false
+      - EVENTSTORE_GOSSIP_SEED=172.31.0.12:2112,172.31.0.13:2112
+    expose:
+      - 1113
+      - 2113
+      - 1112
+      - 2112
+    ports:
+      - 2113:2113
+    networks:
+      rpc_net:
+        ipv4_address: 172.31.0.11
+  eventstore2:
+    image: eventstore/eventstore
+    environment:
+      - EVENTSTORE_INT_IP=172.31.0.12
+      - EVENTSTORE_EXT_IP=172.31.0.12
+      - EVENTSTORE_CLUSTER_SIZE=3
+      - EVENTSTORE_DISCOVER_VIA_DNS=false
+      - EVENTSTORE_GOSSIP_SEED=172.31.0.11:2112,172.31.0.13:2112
+    expose:
+      - 1113
+      - 2113
+      - 1112
+      - 2112
+    networks:
+      rpc_net:
+        ipv4_address: 172.31.0.12
+  eventstore3:
+    image: eventstore/eventstore
+    environment:
+      - EVENTSTORE_INT_IP=172.31.0.13
+      - EVENTSTORE_EXT_IP=172.31.0.13
+      - EVENTSTORE_CLUSTER_SIZE=3
+      - EVENTSTORE_DISCOVER_VIA_DNS=false
+      - EVENTSTORE_GOSSIP_SEED=172.31.0.11:2112,172.31.0.12:2112
+    expose:
+      - 1113
+      - 2113
+      - 1112
+      - 2112
+    networks:
+      rpc_net:
+        ipv4_address: 172.31.0.13
+
+  rpc:
+    image: mono
+    command:
+      - mono
+      - /app/EventStore.RPC.Server.Console.exe
+    ports:
+      - 3113:3113
+    volumes:
+      - "./EventStore.RPC.Server.Console/bin/Debug:/app"
+    networks:
+      rpc_net:
+        ipv4_address: 172.31.0.5
+
+networks:
+  rpc_net:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.31.0.0/24
+          gateway: 172.31.0.1
