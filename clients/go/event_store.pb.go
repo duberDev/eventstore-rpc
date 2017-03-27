@@ -13,12 +13,21 @@ It has these top-level messages:
 	AppendToStreamResponse
 	SubscribeToStreamFromRequest
 	SubscribeToStreamFromResponse
+	CreatePersistentSubscriptionRequest
+	CreatePersistentSubscriptionResponse
+	UpdatePersistentSubscriptionRequest
+	UpdatePersistentSubscriptionResponse
+	DeletePersistentSubscriptionRequest
+	DeletePersistentSubscriptionResponse
+	ConnectToPersistentSubscriptionRequest
+	ConnectToPersistentSubscriptionResponse
 	EventData
 	UserCredentials
 	Position
 	Error
 	RecordedEvent
 	ResolvedEvent
+	PersistentSubscriptionSettings
 */
 package eventstore
 
@@ -98,6 +107,62 @@ func (SubscribeToStreamFromResponse_DropReason) EnumDescriptor() ([]byte, []int)
 	return fileDescriptor0, []int{3, 0}
 }
 
+type ConnectToPersistentSubscriptionResponse_DropReason int32
+
+const (
+	ConnectToPersistentSubscriptionResponse_UserInitiated                 ConnectToPersistentSubscriptionResponse_DropReason = 0
+	ConnectToPersistentSubscriptionResponse_NotAuthenticated              ConnectToPersistentSubscriptionResponse_DropReason = 1
+	ConnectToPersistentSubscriptionResponse_AccessDenied                  ConnectToPersistentSubscriptionResponse_DropReason = 2
+	ConnectToPersistentSubscriptionResponse_SubscribingError              ConnectToPersistentSubscriptionResponse_DropReason = 3
+	ConnectToPersistentSubscriptionResponse_ServerError                   ConnectToPersistentSubscriptionResponse_DropReason = 4
+	ConnectToPersistentSubscriptionResponse_ConnectionClosed              ConnectToPersistentSubscriptionResponse_DropReason = 5
+	ConnectToPersistentSubscriptionResponse_CatchUpError                  ConnectToPersistentSubscriptionResponse_DropReason = 6
+	ConnectToPersistentSubscriptionResponse_ProcessingQueueOverflow       ConnectToPersistentSubscriptionResponse_DropReason = 7
+	ConnectToPersistentSubscriptionResponse_EventHandlerException         ConnectToPersistentSubscriptionResponse_DropReason = 8
+	ConnectToPersistentSubscriptionResponse_MaxSubscribersReached         ConnectToPersistentSubscriptionResponse_DropReason = 9
+	ConnectToPersistentSubscriptionResponse_PersistentSubscriptionDeleted ConnectToPersistentSubscriptionResponse_DropReason = 10
+	ConnectToPersistentSubscriptionResponse_Unknown                       ConnectToPersistentSubscriptionResponse_DropReason = 100
+	ConnectToPersistentSubscriptionResponse_NotFound                      ConnectToPersistentSubscriptionResponse_DropReason = 101
+)
+
+var ConnectToPersistentSubscriptionResponse_DropReason_name = map[int32]string{
+	0:   "UserInitiated",
+	1:   "NotAuthenticated",
+	2:   "AccessDenied",
+	3:   "SubscribingError",
+	4:   "ServerError",
+	5:   "ConnectionClosed",
+	6:   "CatchUpError",
+	7:   "ProcessingQueueOverflow",
+	8:   "EventHandlerException",
+	9:   "MaxSubscribersReached",
+	10:  "PersistentSubscriptionDeleted",
+	100: "Unknown",
+	101: "NotFound",
+}
+var ConnectToPersistentSubscriptionResponse_DropReason_value = map[string]int32{
+	"UserInitiated":                 0,
+	"NotAuthenticated":              1,
+	"AccessDenied":                  2,
+	"SubscribingError":              3,
+	"ServerError":                   4,
+	"ConnectionClosed":              5,
+	"CatchUpError":                  6,
+	"ProcessingQueueOverflow":       7,
+	"EventHandlerException":         8,
+	"MaxSubscribersReached":         9,
+	"PersistentSubscriptionDeleted": 10,
+	"Unknown":                       100,
+	"NotFound":                      101,
+}
+
+func (x ConnectToPersistentSubscriptionResponse_DropReason) String() string {
+	return proto.EnumName(ConnectToPersistentSubscriptionResponse_DropReason_name, int32(x))
+}
+func (ConnectToPersistentSubscriptionResponse_DropReason) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor0, []int{11, 0}
+}
+
 type AppendToStreamRequest struct {
 	StreamId        string           `protobuf:"bytes,1,opt,name=stream_id,json=streamId" json:"stream_id,omitempty"`
 	ExpectedVersion int32            `protobuf:"varint,2,opt,name=expected_version,json=expectedVersion" json:"expected_version,omitempty"`
@@ -139,7 +204,7 @@ func (m *AppendToStreamRequest) GetUserCredentials() *UserCredentials {
 }
 
 type AppendToStreamResponse struct {
-	NextExpectedVersion int32     `protobuf:"varint,1,opt,name=next_expected_version,json=nextExpectedVersion" json:"next_expected_version,omitempty"`
+	NextExpectedVersion int64     `protobuf:"varint,1,opt,name=next_expected_version,json=nextExpectedVersion" json:"next_expected_version,omitempty"`
 	Position            *Position `protobuf:"bytes,2,opt,name=position" json:"position,omitempty"`
 	Error               *Error    `protobuf:"bytes,3,opt,name=error" json:"error,omitempty"`
 }
@@ -149,7 +214,7 @@ func (m *AppendToStreamResponse) String() string            { return proto.Compa
 func (*AppendToStreamResponse) ProtoMessage()               {}
 func (*AppendToStreamResponse) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{1} }
 
-func (m *AppendToStreamResponse) GetNextExpectedVersion() int32 {
+func (m *AppendToStreamResponse) GetNextExpectedVersion() int64 {
 	if m != nil {
 		return m.NextExpectedVersion
 	}
@@ -234,6 +299,242 @@ func (m *SubscribeToStreamFromResponse) GetError() *Error {
 	return nil
 }
 
+type CreatePersistentSubscriptionRequest struct {
+	Stream          string                          `protobuf:"bytes,1,opt,name=stream" json:"stream,omitempty"`
+	GroupName       string                          `protobuf:"bytes,2,opt,name=groupName" json:"groupName,omitempty"`
+	Settings        *PersistentSubscriptionSettings `protobuf:"bytes,3,opt,name=settings" json:"settings,omitempty"`
+	UserCredentials *UserCredentials                `protobuf:"bytes,4,opt,name=user_credentials,json=userCredentials" json:"user_credentials,omitempty"`
+}
+
+func (m *CreatePersistentSubscriptionRequest) Reset()         { *m = CreatePersistentSubscriptionRequest{} }
+func (m *CreatePersistentSubscriptionRequest) String() string { return proto.CompactTextString(m) }
+func (*CreatePersistentSubscriptionRequest) ProtoMessage()    {}
+func (*CreatePersistentSubscriptionRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor0, []int{4}
+}
+
+func (m *CreatePersistentSubscriptionRequest) GetStream() string {
+	if m != nil {
+		return m.Stream
+	}
+	return ""
+}
+
+func (m *CreatePersistentSubscriptionRequest) GetGroupName() string {
+	if m != nil {
+		return m.GroupName
+	}
+	return ""
+}
+
+func (m *CreatePersistentSubscriptionRequest) GetSettings() *PersistentSubscriptionSettings {
+	if m != nil {
+		return m.Settings
+	}
+	return nil
+}
+
+func (m *CreatePersistentSubscriptionRequest) GetUserCredentials() *UserCredentials {
+	if m != nil {
+		return m.UserCredentials
+	}
+	return nil
+}
+
+type CreatePersistentSubscriptionResponse struct {
+}
+
+func (m *CreatePersistentSubscriptionResponse) Reset()         { *m = CreatePersistentSubscriptionResponse{} }
+func (m *CreatePersistentSubscriptionResponse) String() string { return proto.CompactTextString(m) }
+func (*CreatePersistentSubscriptionResponse) ProtoMessage()    {}
+func (*CreatePersistentSubscriptionResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor0, []int{5}
+}
+
+type UpdatePersistentSubscriptionRequest struct {
+	Stream          string                          `protobuf:"bytes,1,opt,name=stream" json:"stream,omitempty"`
+	GroupName       string                          `protobuf:"bytes,2,opt,name=groupName" json:"groupName,omitempty"`
+	Settings        *PersistentSubscriptionSettings `protobuf:"bytes,3,opt,name=settings" json:"settings,omitempty"`
+	UserCredentials *UserCredentials                `protobuf:"bytes,4,opt,name=user_credentials,json=userCredentials" json:"user_credentials,omitempty"`
+}
+
+func (m *UpdatePersistentSubscriptionRequest) Reset()         { *m = UpdatePersistentSubscriptionRequest{} }
+func (m *UpdatePersistentSubscriptionRequest) String() string { return proto.CompactTextString(m) }
+func (*UpdatePersistentSubscriptionRequest) ProtoMessage()    {}
+func (*UpdatePersistentSubscriptionRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor0, []int{6}
+}
+
+func (m *UpdatePersistentSubscriptionRequest) GetStream() string {
+	if m != nil {
+		return m.Stream
+	}
+	return ""
+}
+
+func (m *UpdatePersistentSubscriptionRequest) GetGroupName() string {
+	if m != nil {
+		return m.GroupName
+	}
+	return ""
+}
+
+func (m *UpdatePersistentSubscriptionRequest) GetSettings() *PersistentSubscriptionSettings {
+	if m != nil {
+		return m.Settings
+	}
+	return nil
+}
+
+func (m *UpdatePersistentSubscriptionRequest) GetUserCredentials() *UserCredentials {
+	if m != nil {
+		return m.UserCredentials
+	}
+	return nil
+}
+
+type UpdatePersistentSubscriptionResponse struct {
+}
+
+func (m *UpdatePersistentSubscriptionResponse) Reset()         { *m = UpdatePersistentSubscriptionResponse{} }
+func (m *UpdatePersistentSubscriptionResponse) String() string { return proto.CompactTextString(m) }
+func (*UpdatePersistentSubscriptionResponse) ProtoMessage()    {}
+func (*UpdatePersistentSubscriptionResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor0, []int{7}
+}
+
+type DeletePersistentSubscriptionRequest struct {
+	Stream          string           `protobuf:"bytes,1,opt,name=stream" json:"stream,omitempty"`
+	GroupName       string           `protobuf:"bytes,2,opt,name=groupName" json:"groupName,omitempty"`
+	UserCredentials *UserCredentials `protobuf:"bytes,3,opt,name=user_credentials,json=userCredentials" json:"user_credentials,omitempty"`
+}
+
+func (m *DeletePersistentSubscriptionRequest) Reset()         { *m = DeletePersistentSubscriptionRequest{} }
+func (m *DeletePersistentSubscriptionRequest) String() string { return proto.CompactTextString(m) }
+func (*DeletePersistentSubscriptionRequest) ProtoMessage()    {}
+func (*DeletePersistentSubscriptionRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor0, []int{8}
+}
+
+func (m *DeletePersistentSubscriptionRequest) GetStream() string {
+	if m != nil {
+		return m.Stream
+	}
+	return ""
+}
+
+func (m *DeletePersistentSubscriptionRequest) GetGroupName() string {
+	if m != nil {
+		return m.GroupName
+	}
+	return ""
+}
+
+func (m *DeletePersistentSubscriptionRequest) GetUserCredentials() *UserCredentials {
+	if m != nil {
+		return m.UserCredentials
+	}
+	return nil
+}
+
+type DeletePersistentSubscriptionResponse struct {
+}
+
+func (m *DeletePersistentSubscriptionResponse) Reset()         { *m = DeletePersistentSubscriptionResponse{} }
+func (m *DeletePersistentSubscriptionResponse) String() string { return proto.CompactTextString(m) }
+func (*DeletePersistentSubscriptionResponse) ProtoMessage()    {}
+func (*DeletePersistentSubscriptionResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor0, []int{9}
+}
+
+type ConnectToPersistentSubscriptionRequest struct {
+	Stream          string           `protobuf:"bytes,1,opt,name=stream" json:"stream,omitempty"`
+	GroupName       string           `protobuf:"bytes,2,opt,name=groupName" json:"groupName,omitempty"`
+	UserCredentials *UserCredentials `protobuf:"bytes,3,opt,name=user_credentials,json=userCredentials" json:"user_credentials,omitempty"`
+	BufferSize      int32            `protobuf:"varint,4,opt,name=bufferSize" json:"bufferSize,omitempty"`
+	AutoAck         bool             `protobuf:"varint,5,opt,name=autoAck" json:"autoAck,omitempty"`
+}
+
+func (m *ConnectToPersistentSubscriptionRequest) Reset() {
+	*m = ConnectToPersistentSubscriptionRequest{}
+}
+func (m *ConnectToPersistentSubscriptionRequest) String() string { return proto.CompactTextString(m) }
+func (*ConnectToPersistentSubscriptionRequest) ProtoMessage()    {}
+func (*ConnectToPersistentSubscriptionRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor0, []int{10}
+}
+
+func (m *ConnectToPersistentSubscriptionRequest) GetStream() string {
+	if m != nil {
+		return m.Stream
+	}
+	return ""
+}
+
+func (m *ConnectToPersistentSubscriptionRequest) GetGroupName() string {
+	if m != nil {
+		return m.GroupName
+	}
+	return ""
+}
+
+func (m *ConnectToPersistentSubscriptionRequest) GetUserCredentials() *UserCredentials {
+	if m != nil {
+		return m.UserCredentials
+	}
+	return nil
+}
+
+func (m *ConnectToPersistentSubscriptionRequest) GetBufferSize() int32 {
+	if m != nil {
+		return m.BufferSize
+	}
+	return 0
+}
+
+func (m *ConnectToPersistentSubscriptionRequest) GetAutoAck() bool {
+	if m != nil {
+		return m.AutoAck
+	}
+	return false
+}
+
+type ConnectToPersistentSubscriptionResponse struct {
+	Event      *ResolvedEvent                                     `protobuf:"bytes,1,opt,name=event" json:"event,omitempty"`
+	DropReason ConnectToPersistentSubscriptionResponse_DropReason `protobuf:"varint,2,opt,name=drop_reason,json=dropReason,enum=eventstore.ConnectToPersistentSubscriptionResponse_DropReason" json:"drop_reason,omitempty"`
+	Error      *Error                                             `protobuf:"bytes,3,opt,name=error" json:"error,omitempty"`
+}
+
+func (m *ConnectToPersistentSubscriptionResponse) Reset() {
+	*m = ConnectToPersistentSubscriptionResponse{}
+}
+func (m *ConnectToPersistentSubscriptionResponse) String() string { return proto.CompactTextString(m) }
+func (*ConnectToPersistentSubscriptionResponse) ProtoMessage()    {}
+func (*ConnectToPersistentSubscriptionResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor0, []int{11}
+}
+
+func (m *ConnectToPersistentSubscriptionResponse) GetEvent() *ResolvedEvent {
+	if m != nil {
+		return m.Event
+	}
+	return nil
+}
+
+func (m *ConnectToPersistentSubscriptionResponse) GetDropReason() ConnectToPersistentSubscriptionResponse_DropReason {
+	if m != nil {
+		return m.DropReason
+	}
+	return ConnectToPersistentSubscriptionResponse_UserInitiated
+}
+
+func (m *ConnectToPersistentSubscriptionResponse) GetError() *Error {
+	if m != nil {
+		return m.Error
+	}
+	return nil
+}
+
 type EventData struct {
 	EventId   []byte `protobuf:"bytes,1,opt,name=event_id,json=eventId,proto3" json:"event_id,omitempty"`
 	EventType string `protobuf:"bytes,2,opt,name=event_type,json=eventType" json:"event_type,omitempty"`
@@ -245,7 +546,7 @@ type EventData struct {
 func (m *EventData) Reset()                    { *m = EventData{} }
 func (m *EventData) String() string            { return proto.CompactTextString(m) }
 func (*EventData) ProtoMessage()               {}
-func (*EventData) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{4} }
+func (*EventData) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{12} }
 
 func (m *EventData) GetEventId() []byte {
 	if m != nil {
@@ -290,7 +591,7 @@ type UserCredentials struct {
 func (m *UserCredentials) Reset()                    { *m = UserCredentials{} }
 func (m *UserCredentials) String() string            { return proto.CompactTextString(m) }
 func (*UserCredentials) ProtoMessage()               {}
-func (*UserCredentials) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{5} }
+func (*UserCredentials) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{13} }
 
 func (m *UserCredentials) GetUsername() string {
 	if m != nil {
@@ -314,7 +615,7 @@ type Position struct {
 func (m *Position) Reset()                    { *m = Position{} }
 func (m *Position) String() string            { return proto.CompactTextString(m) }
 func (*Position) ProtoMessage()               {}
-func (*Position) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{6} }
+func (*Position) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{14} }
 
 func (m *Position) GetCommitPosition() int64 {
 	if m != nil {
@@ -338,7 +639,7 @@ type Error struct {
 func (m *Error) Reset()                    { *m = Error{} }
 func (m *Error) String() string            { return proto.CompactTextString(m) }
 func (*Error) ProtoMessage()               {}
-func (*Error) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{7} }
+func (*Error) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{15} }
 
 func (m *Error) GetType() string {
 	if m != nil {
@@ -357,7 +658,7 @@ func (m *Error) GetText() string {
 type RecordedEvent struct {
 	EventStreamId string `protobuf:"bytes,1,opt,name=event_stream_id,json=eventStreamId" json:"event_stream_id,omitempty"`
 	EventId       []byte `protobuf:"bytes,2,opt,name=event_id,json=eventId,proto3" json:"event_id,omitempty"`
-	EventNumber   int32  `protobuf:"varint,3,opt,name=event_number,json=eventNumber" json:"event_number,omitempty"`
+	EventNumber   int64  `protobuf:"varint,3,opt,name=event_number,json=eventNumber" json:"event_number,omitempty"`
 	EventType     string `protobuf:"bytes,4,opt,name=event_type,json=eventType" json:"event_type,omitempty"`
 	Data          []byte `protobuf:"bytes,5,opt,name=data,proto3" json:"data,omitempty"`
 	Metadata      []byte `protobuf:"bytes,6,opt,name=metadata,proto3" json:"metadata,omitempty"`
@@ -369,7 +670,7 @@ type RecordedEvent struct {
 func (m *RecordedEvent) Reset()                    { *m = RecordedEvent{} }
 func (m *RecordedEvent) String() string            { return proto.CompactTextString(m) }
 func (*RecordedEvent) ProtoMessage()               {}
-func (*RecordedEvent) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{8} }
+func (*RecordedEvent) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{16} }
 
 func (m *RecordedEvent) GetEventStreamId() string {
 	if m != nil {
@@ -385,7 +686,7 @@ func (m *RecordedEvent) GetEventId() []byte {
 	return nil
 }
 
-func (m *RecordedEvent) GetEventNumber() int32 {
+func (m *RecordedEvent) GetEventNumber() int64 {
 	if m != nil {
 		return m.EventNumber
 	}
@@ -442,7 +743,7 @@ type ResolvedEvent struct {
 func (m *ResolvedEvent) Reset()                    { *m = ResolvedEvent{} }
 func (m *ResolvedEvent) String() string            { return proto.CompactTextString(m) }
 func (*ResolvedEvent) ProtoMessage()               {}
-func (*ResolvedEvent) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{9} }
+func (*ResolvedEvent) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{17} }
 
 func (m *ResolvedEvent) GetEvent() *RecordedEvent {
 	if m != nil {
@@ -458,18 +759,140 @@ func (m *ResolvedEvent) GetPosition() *Position {
 	return nil
 }
 
+type PersistentSubscriptionSettings struct {
+	ResolveLinkTos        bool    `protobuf:"varint,1,opt,name=resolve_link_tos,json=resolveLinkTos" json:"resolve_link_tos,omitempty"`
+	StartFrom             int64   `protobuf:"varint,2,opt,name=start_from,json=startFrom" json:"start_from,omitempty"`
+	ExtraStatistics       bool    `protobuf:"varint,3,opt,name=extra_statistics,json=extraStatistics" json:"extra_statistics,omitempty"`
+	MessageTimeout        float64 `protobuf:"fixed64,4,opt,name=message_timeout,json=messageTimeout" json:"message_timeout,omitempty"`
+	MaxRetryCount         int32   `protobuf:"varint,5,opt,name=max_retry_count,json=maxRetryCount" json:"max_retry_count,omitempty"`
+	LiveBufferSize        int32   `protobuf:"varint,6,opt,name=live_buffer_size,json=liveBufferSize" json:"live_buffer_size,omitempty"`
+	ReadBatchSize         int32   `protobuf:"varint,7,opt,name=read_batch_size,json=readBatchSize" json:"read_batch_size,omitempty"`
+	HistoryBufferSize     int32   `protobuf:"varint,8,opt,name=history_buffer_size,json=historyBufferSize" json:"history_buffer_size,omitempty"`
+	CheckPointAfter       float64 `protobuf:"fixed64,9,opt,name=check_point_after,json=checkPointAfter" json:"check_point_after,omitempty"`
+	MinCheckPointCount    int32   `protobuf:"varint,10,opt,name=min_check_point_count,json=minCheckPointCount" json:"min_check_point_count,omitempty"`
+	MaxCheckPointCount    int32   `protobuf:"varint,11,opt,name=max_check_point_count,json=maxCheckPointCount" json:"max_check_point_count,omitempty"`
+	MaxSubscriberCount    int32   `protobuf:"varint,12,opt,name=max_subscriber_count,json=maxSubscriberCount" json:"max_subscriber_count,omitempty"`
+	NamedConsumerStrategy string  `protobuf:"bytes,13,opt,name=named_consumer_strategy,json=namedConsumerStrategy" json:"named_consumer_strategy,omitempty"`
+}
+
+func (m *PersistentSubscriptionSettings) Reset()                    { *m = PersistentSubscriptionSettings{} }
+func (m *PersistentSubscriptionSettings) String() string            { return proto.CompactTextString(m) }
+func (*PersistentSubscriptionSettings) ProtoMessage()               {}
+func (*PersistentSubscriptionSettings) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{18} }
+
+func (m *PersistentSubscriptionSettings) GetResolveLinkTos() bool {
+	if m != nil {
+		return m.ResolveLinkTos
+	}
+	return false
+}
+
+func (m *PersistentSubscriptionSettings) GetStartFrom() int64 {
+	if m != nil {
+		return m.StartFrom
+	}
+	return 0
+}
+
+func (m *PersistentSubscriptionSettings) GetExtraStatistics() bool {
+	if m != nil {
+		return m.ExtraStatistics
+	}
+	return false
+}
+
+func (m *PersistentSubscriptionSettings) GetMessageTimeout() float64 {
+	if m != nil {
+		return m.MessageTimeout
+	}
+	return 0
+}
+
+func (m *PersistentSubscriptionSettings) GetMaxRetryCount() int32 {
+	if m != nil {
+		return m.MaxRetryCount
+	}
+	return 0
+}
+
+func (m *PersistentSubscriptionSettings) GetLiveBufferSize() int32 {
+	if m != nil {
+		return m.LiveBufferSize
+	}
+	return 0
+}
+
+func (m *PersistentSubscriptionSettings) GetReadBatchSize() int32 {
+	if m != nil {
+		return m.ReadBatchSize
+	}
+	return 0
+}
+
+func (m *PersistentSubscriptionSettings) GetHistoryBufferSize() int32 {
+	if m != nil {
+		return m.HistoryBufferSize
+	}
+	return 0
+}
+
+func (m *PersistentSubscriptionSettings) GetCheckPointAfter() float64 {
+	if m != nil {
+		return m.CheckPointAfter
+	}
+	return 0
+}
+
+func (m *PersistentSubscriptionSettings) GetMinCheckPointCount() int32 {
+	if m != nil {
+		return m.MinCheckPointCount
+	}
+	return 0
+}
+
+func (m *PersistentSubscriptionSettings) GetMaxCheckPointCount() int32 {
+	if m != nil {
+		return m.MaxCheckPointCount
+	}
+	return 0
+}
+
+func (m *PersistentSubscriptionSettings) GetMaxSubscriberCount() int32 {
+	if m != nil {
+		return m.MaxSubscriberCount
+	}
+	return 0
+}
+
+func (m *PersistentSubscriptionSettings) GetNamedConsumerStrategy() string {
+	if m != nil {
+		return m.NamedConsumerStrategy
+	}
+	return ""
+}
+
 func init() {
 	proto.RegisterType((*AppendToStreamRequest)(nil), "eventstore.AppendToStreamRequest")
 	proto.RegisterType((*AppendToStreamResponse)(nil), "eventstore.AppendToStreamResponse")
 	proto.RegisterType((*SubscribeToStreamFromRequest)(nil), "eventstore.SubscribeToStreamFromRequest")
 	proto.RegisterType((*SubscribeToStreamFromResponse)(nil), "eventstore.SubscribeToStreamFromResponse")
+	proto.RegisterType((*CreatePersistentSubscriptionRequest)(nil), "eventstore.CreatePersistentSubscriptionRequest")
+	proto.RegisterType((*CreatePersistentSubscriptionResponse)(nil), "eventstore.CreatePersistentSubscriptionResponse")
+	proto.RegisterType((*UpdatePersistentSubscriptionRequest)(nil), "eventstore.UpdatePersistentSubscriptionRequest")
+	proto.RegisterType((*UpdatePersistentSubscriptionResponse)(nil), "eventstore.UpdatePersistentSubscriptionResponse")
+	proto.RegisterType((*DeletePersistentSubscriptionRequest)(nil), "eventstore.DeletePersistentSubscriptionRequest")
+	proto.RegisterType((*DeletePersistentSubscriptionResponse)(nil), "eventstore.DeletePersistentSubscriptionResponse")
+	proto.RegisterType((*ConnectToPersistentSubscriptionRequest)(nil), "eventstore.ConnectToPersistentSubscriptionRequest")
+	proto.RegisterType((*ConnectToPersistentSubscriptionResponse)(nil), "eventstore.ConnectToPersistentSubscriptionResponse")
 	proto.RegisterType((*EventData)(nil), "eventstore.EventData")
 	proto.RegisterType((*UserCredentials)(nil), "eventstore.UserCredentials")
 	proto.RegisterType((*Position)(nil), "eventstore.Position")
 	proto.RegisterType((*Error)(nil), "eventstore.Error")
 	proto.RegisterType((*RecordedEvent)(nil), "eventstore.RecordedEvent")
 	proto.RegisterType((*ResolvedEvent)(nil), "eventstore.ResolvedEvent")
+	proto.RegisterType((*PersistentSubscriptionSettings)(nil), "eventstore.PersistentSubscriptionSettings")
 	proto.RegisterEnum("eventstore.SubscribeToStreamFromResponse_DropReason", SubscribeToStreamFromResponse_DropReason_name, SubscribeToStreamFromResponse_DropReason_value)
+	proto.RegisterEnum("eventstore.ConnectToPersistentSubscriptionResponse_DropReason", ConnectToPersistentSubscriptionResponse_DropReason_name, ConnectToPersistentSubscriptionResponse_DropReason_value)
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -485,6 +908,10 @@ const _ = grpc.SupportPackageIsVersion4
 type EventStoreClient interface {
 	AppendToStream(ctx context.Context, in *AppendToStreamRequest, opts ...grpc.CallOption) (*AppendToStreamResponse, error)
 	SubscribeToStreamFrom(ctx context.Context, opts ...grpc.CallOption) (EventStore_SubscribeToStreamFromClient, error)
+	CreatePersistentSubscription(ctx context.Context, in *CreatePersistentSubscriptionRequest, opts ...grpc.CallOption) (*CreatePersistentSubscriptionResponse, error)
+	UpdatePersistentSubscription(ctx context.Context, in *UpdatePersistentSubscriptionRequest, opts ...grpc.CallOption) (*UpdatePersistentSubscriptionResponse, error)
+	DeletePersistentSubscription(ctx context.Context, in *DeletePersistentSubscriptionRequest, opts ...grpc.CallOption) (*DeletePersistentSubscriptionResponse, error)
+	ConnectToPersistentSubscription(ctx context.Context, opts ...grpc.CallOption) (EventStore_ConnectToPersistentSubscriptionClient, error)
 }
 
 type eventStoreClient struct {
@@ -535,11 +962,73 @@ func (x *eventStoreSubscribeToStreamFromClient) Recv() (*SubscribeToStreamFromRe
 	return m, nil
 }
 
+func (c *eventStoreClient) CreatePersistentSubscription(ctx context.Context, in *CreatePersistentSubscriptionRequest, opts ...grpc.CallOption) (*CreatePersistentSubscriptionResponse, error) {
+	out := new(CreatePersistentSubscriptionResponse)
+	err := grpc.Invoke(ctx, "/eventstore.EventStore/CreatePersistentSubscription", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *eventStoreClient) UpdatePersistentSubscription(ctx context.Context, in *UpdatePersistentSubscriptionRequest, opts ...grpc.CallOption) (*UpdatePersistentSubscriptionResponse, error) {
+	out := new(UpdatePersistentSubscriptionResponse)
+	err := grpc.Invoke(ctx, "/eventstore.EventStore/UpdatePersistentSubscription", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *eventStoreClient) DeletePersistentSubscription(ctx context.Context, in *DeletePersistentSubscriptionRequest, opts ...grpc.CallOption) (*DeletePersistentSubscriptionResponse, error) {
+	out := new(DeletePersistentSubscriptionResponse)
+	err := grpc.Invoke(ctx, "/eventstore.EventStore/DeletePersistentSubscription", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *eventStoreClient) ConnectToPersistentSubscription(ctx context.Context, opts ...grpc.CallOption) (EventStore_ConnectToPersistentSubscriptionClient, error) {
+	stream, err := grpc.NewClientStream(ctx, &_EventStore_serviceDesc.Streams[1], c.cc, "/eventstore.EventStore/ConnectToPersistentSubscription", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &eventStoreConnectToPersistentSubscriptionClient{stream}
+	return x, nil
+}
+
+type EventStore_ConnectToPersistentSubscriptionClient interface {
+	Send(*ConnectToPersistentSubscriptionRequest) error
+	Recv() (*ConnectToPersistentSubscriptionResponse, error)
+	grpc.ClientStream
+}
+
+type eventStoreConnectToPersistentSubscriptionClient struct {
+	grpc.ClientStream
+}
+
+func (x *eventStoreConnectToPersistentSubscriptionClient) Send(m *ConnectToPersistentSubscriptionRequest) error {
+	return x.ClientStream.SendMsg(m)
+}
+
+func (x *eventStoreConnectToPersistentSubscriptionClient) Recv() (*ConnectToPersistentSubscriptionResponse, error) {
+	m := new(ConnectToPersistentSubscriptionResponse)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 // Server API for EventStore service
 
 type EventStoreServer interface {
 	AppendToStream(context.Context, *AppendToStreamRequest) (*AppendToStreamResponse, error)
 	SubscribeToStreamFrom(EventStore_SubscribeToStreamFromServer) error
+	CreatePersistentSubscription(context.Context, *CreatePersistentSubscriptionRequest) (*CreatePersistentSubscriptionResponse, error)
+	UpdatePersistentSubscription(context.Context, *UpdatePersistentSubscriptionRequest) (*UpdatePersistentSubscriptionResponse, error)
+	DeletePersistentSubscription(context.Context, *DeletePersistentSubscriptionRequest) (*DeletePersistentSubscriptionResponse, error)
+	ConnectToPersistentSubscription(EventStore_ConnectToPersistentSubscriptionServer) error
 }
 
 func RegisterEventStoreServer(s *grpc.Server, srv EventStoreServer) {
@@ -590,6 +1079,86 @@ func (x *eventStoreSubscribeToStreamFromServer) Recv() (*SubscribeToStreamFromRe
 	return m, nil
 }
 
+func _EventStore_CreatePersistentSubscription_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreatePersistentSubscriptionRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(EventStoreServer).CreatePersistentSubscription(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/eventstore.EventStore/CreatePersistentSubscription",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(EventStoreServer).CreatePersistentSubscription(ctx, req.(*CreatePersistentSubscriptionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _EventStore_UpdatePersistentSubscription_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdatePersistentSubscriptionRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(EventStoreServer).UpdatePersistentSubscription(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/eventstore.EventStore/UpdatePersistentSubscription",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(EventStoreServer).UpdatePersistentSubscription(ctx, req.(*UpdatePersistentSubscriptionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _EventStore_DeletePersistentSubscription_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeletePersistentSubscriptionRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(EventStoreServer).DeletePersistentSubscription(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/eventstore.EventStore/DeletePersistentSubscription",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(EventStoreServer).DeletePersistentSubscription(ctx, req.(*DeletePersistentSubscriptionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _EventStore_ConnectToPersistentSubscription_Handler(srv interface{}, stream grpc.ServerStream) error {
+	return srv.(EventStoreServer).ConnectToPersistentSubscription(&eventStoreConnectToPersistentSubscriptionServer{stream})
+}
+
+type EventStore_ConnectToPersistentSubscriptionServer interface {
+	Send(*ConnectToPersistentSubscriptionResponse) error
+	Recv() (*ConnectToPersistentSubscriptionRequest, error)
+	grpc.ServerStream
+}
+
+type eventStoreConnectToPersistentSubscriptionServer struct {
+	grpc.ServerStream
+}
+
+func (x *eventStoreConnectToPersistentSubscriptionServer) Send(m *ConnectToPersistentSubscriptionResponse) error {
+	return x.ServerStream.SendMsg(m)
+}
+
+func (x *eventStoreConnectToPersistentSubscriptionServer) Recv() (*ConnectToPersistentSubscriptionRequest, error) {
+	m := new(ConnectToPersistentSubscriptionRequest)
+	if err := x.ServerStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 var _EventStore_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "eventstore.EventStore",
 	HandlerType: (*EventStoreServer)(nil),
@@ -598,11 +1167,29 @@ var _EventStore_serviceDesc = grpc.ServiceDesc{
 			MethodName: "AppendToStream",
 			Handler:    _EventStore_AppendToStream_Handler,
 		},
+		{
+			MethodName: "CreatePersistentSubscription",
+			Handler:    _EventStore_CreatePersistentSubscription_Handler,
+		},
+		{
+			MethodName: "UpdatePersistentSubscription",
+			Handler:    _EventStore_UpdatePersistentSubscription_Handler,
+		},
+		{
+			MethodName: "DeletePersistentSubscription",
+			Handler:    _EventStore_DeletePersistentSubscription_Handler,
+		},
 	},
 	Streams: []grpc.StreamDesc{
 		{
 			StreamName:    "SubscribeToStreamFrom",
 			Handler:       _EventStore_SubscribeToStreamFrom_Handler,
+			ServerStreams: true,
+			ClientStreams: true,
+		},
+		{
+			StreamName:    "ConnectToPersistentSubscription",
+			Handler:       _EventStore_ConnectToPersistentSubscription_Handler,
 			ServerStreams: true,
 			ClientStreams: true,
 		},
@@ -613,65 +1200,98 @@ var _EventStore_serviceDesc = grpc.ServiceDesc{
 func init() { proto.RegisterFile("event_store.proto", fileDescriptor0) }
 
 var fileDescriptor0 = []byte{
-	// 946 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x09, 0x6e, 0x88, 0x02, 0xff, 0x9c, 0x56, 0xcd, 0x72, 0x23, 0x35,
-	0x10, 0xce, 0xd8, 0xf1, 0x5f, 0xdb, 0xb1, 0x27, 0x62, 0xcd, 0x3a, 0x1b, 0x52, 0x95, 0x0c, 0x55,
-	0xac, 0x73, 0xc0, 0xbb, 0x65, 0xb8, 0x70, 0xcc, 0x3a, 0x0e, 0x84, 0x2a, 0x82, 0x91, 0x37, 0x54,
-	0x71, 0x61, 0x6a, 0x32, 0x6a, 0xd6, 0xc3, 0xda, 0xd2, 0x20, 0xc9, 0x8e, 0xf7, 0x25, 0x78, 0x02,
-	0x4e, 0x5c, 0xb6, 0x8a, 0xe2, 0x79, 0xb8, 0xf0, 0x26, 0x9c, 0x28, 0x69, 0x66, 0xec, 0xb1, 0xc9,
-	0x86, 0xc0, 0x4d, 0xfa, 0xba, 0xd5, 0xea, 0xfe, 0x3e, 0x75, 0xcf, 0xc0, 0x3e, 0x2e, 0x90, 0x6b,
-	0x5f, 0x69, 0x21, 0xb1, 0x17, 0x4b, 0xa1, 0x05, 0x01, 0x0b, 0x59, 0xc4, 0xfb, 0xc3, 0x81, 0xf6,
-	0x59, 0x1c, 0x23, 0x67, 0x2f, 0xc5, 0x58, 0x4b, 0x0c, 0x66, 0x14, 0x7f, 0x9a, 0xa3, 0xd2, 0xe4,
-	0x10, 0x6a, 0xca, 0x02, 0x7e, 0xc4, 0x3a, 0xce, 0xb1, 0xd3, 0xad, 0xd1, 0x6a, 0x02, 0x5c, 0x32,
-	0x72, 0x0a, 0x2e, 0x2e, 0x63, 0x0c, 0x35, 0x32, 0x7f, 0x81, 0x52, 0x45, 0x82, 0x77, 0x0a, 0xc7,
-	0x4e, 0xb7, 0x44, 0x5b, 0x19, 0xfe, 0x6d, 0x02, 0x93, 0x8f, 0xa1, 0x9c, 0xdc, 0xd7, 0x29, 0x1e,
-	0x17, 0xbb, 0xf5, 0x7e, 0xbb, 0xb7, 0xbe, 0xbe, 0x37, 0x34, 0xcb, 0xf3, 0x40, 0x07, 0x34, 0x75,
-	0x22, 0x17, 0xe0, 0xce, 0x15, 0x4a, 0x3f, 0x94, 0xc8, 0x90, 0xeb, 0x28, 0x98, 0xaa, 0xce, 0xee,
-	0xb1, 0xd3, 0xad, 0xf7, 0x0f, 0xf3, 0x07, 0xaf, 0x15, 0xca, 0xc1, 0xda, 0x85, 0xb6, 0xe6, 0x9b,
-	0x80, 0xf7, 0xd6, 0x81, 0xf7, 0xb7, 0x0b, 0x53, 0xb1, 0xe0, 0x0a, 0x49, 0x1f, 0xda, 0x1c, 0x97,
-	0xda, 0xff, 0x47, 0x05, 0x8e, 0xad, 0xe0, 0x3d, 0x63, 0x1c, 0x6e, 0x55, 0xf1, 0x1c, 0xaa, 0xb1,
-	0x50, 0x91, 0xce, 0x0a, 0xad, 0xf7, 0x1f, 0xe5, 0xd3, 0x19, 0xa5, 0x36, 0xba, 0xf2, 0x22, 0x4f,
-	0xa1, 0x84, 0x52, 0x0a, 0xd9, 0x29, 0x5a, 0xf7, 0xfd, 0x8d, 0xb2, 0x8d, 0x81, 0x26, 0x76, 0xef,
-	0x77, 0x07, 0x3e, 0x18, 0xcf, 0x6f, 0x54, 0x28, 0xa3, 0x1b, 0xcc, 0x92, 0xbd, 0x90, 0xe2, 0x61,
-	0x4a, 0x3c, 0x85, 0xd6, 0x34, 0x50, 0xda, 0x0f, 0x27, 0x18, 0xbe, 0x8e, 0x45, 0xc4, 0x75, 0x2a,
-	0x44, 0xd3, 0xc0, 0x83, 0x15, 0x7a, 0x27, 0xb1, 0xc5, 0xff, 0x41, 0xec, 0x5f, 0x45, 0x38, 0x7a,
-	0x47, 0xba, 0x29, 0xbf, 0xcf, 0xa0, 0x64, 0x03, 0xda, 0x5c, 0xeb, 0xfd, 0x83, 0x7c, 0x78, 0x8a,
-	0x4a, 0x4c, 0x17, 0xc8, 0xac, 0xf0, 0x34, 0xf1, 0x23, 0xd7, 0x50, 0x67, 0x52, 0xc4, 0xbe, 0xc4,
-	0x40, 0xa5, 0xfc, 0x36, 0xfb, 0x9f, 0xe6, 0x8f, 0xdd, 0x7b, 0x61, 0xef, 0x5c, 0x8a, 0x98, 0xda,
-	0xb3, 0x14, 0xd8, 0x6a, 0xfd, 0x70, 0x05, 0xde, 0x16, 0x00, 0xd6, 0x31, 0xc8, 0x3e, 0xec, 0x19,
-	0x16, 0x2e, 0x79, 0xa4, 0xa3, 0x40, 0x23, 0x73, 0x77, 0xc8, 0x23, 0x70, 0xaf, 0x84, 0x3e, 0x9b,
-	0xeb, 0x89, 0xa1, 0x21, 0xb4, 0xa8, 0x43, 0x5c, 0x68, 0x9c, 0x85, 0x21, 0x2a, 0x75, 0x8e, 0x3c,
-	0x42, 0xe6, 0x16, 0x8c, 0x5f, 0x96, 0x6a, 0xc4, 0x5f, 0xd9, 0x4b, 0xdc, 0x22, 0x69, 0x41, 0x7d,
-	0x8c, 0x72, 0x81, 0x32, 0x01, 0x76, 0x8d, 0xdb, 0x40, 0x70, 0x8e, 0xa1, 0x79, 0x29, 0x83, 0xa9,
-	0x50, 0xc8, 0xdc, 0x92, 0x09, 0x37, 0x08, 0x74, 0x38, 0xb9, 0x8e, 0x13, 0xbf, 0x32, 0x39, 0x84,
-	0xc7, 0x23, 0x29, 0xcc, 0x0d, 0x11, 0x7f, 0xf5, 0xcd, 0x1c, 0xe7, 0xf8, 0xf5, 0x02, 0xe5, 0x0f,
-	0x53, 0x71, 0xeb, 0x56, 0xc8, 0x01, 0xb4, 0x2d, 0x8b, 0x5f, 0x04, 0x9c, 0x4d, 0x51, 0x0e, 0x97,
-	0x21, 0xc6, 0x26, 0x9e, 0x5b, 0x35, 0xa6, 0xaf, 0x82, 0xe5, 0x8a, 0x34, 0xa9, 0x28, 0x06, 0xe1,
-	0x04, 0x99, 0x5b, 0x23, 0x27, 0x70, 0x34, 0x32, 0x6f, 0x5a, 0x69, 0xe4, 0x3a, 0xf5, 0xb0, 0xc7,
-	0xce, 0x71, 0x8a, 0xa6, 0x2c, 0x20, 0x75, 0xa8, 0x5c, 0xf3, 0xd7, 0x5c, 0xdc, 0x72, 0x97, 0x91,
-	0x06, 0x54, 0xaf, 0x84, 0xbe, 0x10, 0x73, 0xce, 0x5c, 0xf4, 0x7e, 0x76, 0xa0, 0xb6, 0xea, 0x59,
-	0x72, 0x00, 0xd5, 0x64, 0xba, 0xa4, 0xef, 0xb2, 0x41, 0x2b, 0x76, 0x7f, 0xc9, 0xc8, 0x11, 0x24,
-	0x53, 0xc6, 0xd7, 0x6f, 0x62, 0xb4, 0x8a, 0xd6, 0x68, 0xcd, 0x22, 0x2f, 0xdf, 0xc4, 0x48, 0x1e,
-	0x43, 0x25, 0x52, 0xfe, 0x8f, 0x46, 0x6d, 0x23, 0x4e, 0x95, 0x96, 0x23, 0xf5, 0xa5, 0xe1, 0x9e,
-	0xc0, 0x2e, 0x0b, 0x74, 0x60, 0x5b, 0xbe, 0x41, 0xed, 0x9a, 0x3c, 0x81, 0xea, 0x0c, 0x75, 0x60,
-	0xf1, 0x92, 0xc5, 0x57, 0x7b, 0xef, 0x12, 0x5a, 0x5b, 0x2f, 0xd6, 0xb8, 0x9b, 0x37, 0xcb, 0x83,
-	0x19, 0x66, 0xdd, 0x92, 0xed, 0x8d, 0x2d, 0x0e, 0x94, 0xba, 0x15, 0x92, 0xa5, 0x49, 0xad, 0xf6,
-	0xde, 0xf7, 0x50, 0x1d, 0xad, 0x9b, 0xb7, 0x15, 0x8a, 0xd9, 0x2c, 0xd2, 0xfe, 0xaa, 0xeb, 0x4d,
-	0xa8, 0x22, 0x6d, 0x26, 0xf0, 0xca, 0xf1, 0x14, 0xdc, 0x58, 0x62, 0x1c, 0x48, 0xf4, 0x37, 0xe6,
-	0x43, 0x91, 0xb6, 0x52, 0x3c, 0x73, 0xf5, 0x9e, 0x41, 0xc9, 0xea, 0x6a, 0x6a, 0xb4, 0xac, 0x24,
-	0xc9, 0xd9, 0xb5, 0xc5, 0x70, 0xa9, 0xd3, 0xa4, 0xec, 0xda, 0xfb, 0xa5, 0x00, 0x7b, 0x14, 0x43,
-	0x21, 0x59, 0xda, 0x2f, 0xe4, 0x23, 0x68, 0x65, 0xe3, 0x7c, 0x73, 0x1e, 0xec, 0x59, 0x78, 0x9c,
-	0x0d, 0x85, 0xbc, 0x30, 0x85, 0x4d, 0x61, 0x4e, 0xa0, 0x91, 0x98, 0xf8, 0x7c, 0x76, 0x83, 0x49,
-	0x6f, 0x94, 0x68, 0xdd, 0x62, 0x57, 0x16, 0xda, 0xd2, 0x6e, 0x77, 0x5b, 0xbb, 0x4c, 0xa2, 0xd2,
-	0x3b, 0x24, 0x2a, 0x6f, 0x4a, 0x94, 0xd7, 0xba, 0xb2, 0xa1, 0x75, 0x07, 0x2a, 0xa1, 0x44, 0xd3,
-	0x4b, 0x9d, 0xaa, 0xa5, 0x2c, 0xdb, 0x92, 0x0f, 0x61, 0x2f, 0x5d, 0xfa, 0x18, 0x8b, 0x70, 0xd2,
-	0xa9, 0x59, 0x7b, 0x23, 0x05, 0x87, 0x06, 0xf3, 0xa4, 0x61, 0x27, 0x37, 0x4d, 0xfe, 0x65, 0xee,
-	0xe4, 0x78, 0xcc, 0xe6, 0xce, 0x7f, 0x1e, 0xea, 0xfd, 0x3f, 0x1d, 0x80, 0x61, 0x42, 0xb5, 0x90,
-	0x48, 0xbe, 0x83, 0xe6, 0xe6, 0x37, 0x86, 0x9c, 0xe4, 0x03, 0xdc, 0xf9, 0x61, 0x7d, 0xe2, 0xdd,
-	0xe7, 0x92, 0x4c, 0x34, 0x6f, 0x87, 0x48, 0x68, 0xdf, 0x39, 0xf4, 0x48, 0xf7, 0x01, 0x73, 0x31,
-	0xb9, 0xe8, 0xf4, 0xc1, 0x13, 0xd4, 0xdb, 0xe9, 0x3a, 0xcf, 0x9d, 0x17, 0x9f, 0x01, 0x09, 0xc5,
-	0x2c, 0x7f, 0x4a, 0xc6, 0xe1, 0x8b, 0xfa, 0xe7, 0x74, 0x34, 0x18, 0x8e, 0x47, 0xe6, 0xdf, 0x61,
-	0xe4, 0xfc, 0x5a, 0x28, 0x0c, 0xc7, 0xbf, 0x15, 0x9a, 0x6b, 0x16, 0x7a, 0x74, 0x34, 0xb8, 0x29,
-	0xdb, 0x5f, 0x8b, 0x4f, 0xfe, 0x0e, 0x00, 0x00, 0xff, 0xff, 0x86, 0xae, 0x65, 0x3e, 0x6f, 0x08,
-	0x00, 0x00,
+	// 1477 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xec, 0x58, 0x5d, 0x6f, 0x1b, 0x45,
+	0x17, 0xce, 0xda, 0xf1, 0xd7, 0x71, 0x12, 0x3b, 0xd3, 0xa6, 0x75, 0x3f, 0xdf, 0xd4, 0xad, 0x52,
+	0xb7, 0xd2, 0x9b, 0xe6, 0x75, 0x5f, 0x21, 0x71, 0x83, 0x94, 0x38, 0x09, 0x04, 0x41, 0x30, 0xeb,
+	0x04, 0x89, 0x1b, 0x56, 0x93, 0xdd, 0x93, 0x64, 0x89, 0xbd, 0xb3, 0xcc, 0x8c, 0x53, 0x87, 0x2b,
+	0x24, 0xee, 0x2b, 0x7e, 0x00, 0x57, 0x70, 0x51, 0x09, 0xf1, 0x7b, 0xb8, 0x46, 0xe2, 0x92, 0x7f,
+	0xc0, 0x15, 0x9a, 0x0f, 0xaf, 0xbd, 0x21, 0x75, 0xdc, 0xaa, 0x20, 0x24, 0xb8, 0xdb, 0x79, 0xce,
+	0x39, 0x33, 0xe7, 0x6b, 0x8e, 0x9f, 0x31, 0x2c, 0xe2, 0x29, 0x46, 0xd2, 0x13, 0x92, 0x71, 0x5c,
+	0x8d, 0x39, 0x93, 0x8c, 0x80, 0x86, 0x34, 0x52, 0xff, 0xc9, 0x81, 0xa5, 0xf5, 0x38, 0xc6, 0x28,
+	0xd8, 0x63, 0x1d, 0xc9, 0x91, 0xf6, 0x5c, 0xfc, 0xa2, 0x8f, 0x42, 0x92, 0x5b, 0x50, 0x12, 0x1a,
+	0xf0, 0xc2, 0xa0, 0xe6, 0x2c, 0x3b, 0x8d, 0x92, 0x5b, 0x34, 0xc0, 0x4e, 0x40, 0x1e, 0x41, 0x15,
+	0x07, 0x31, 0xfa, 0x12, 0x03, 0xef, 0x14, 0xb9, 0x08, 0x59, 0x54, 0xcb, 0x2c, 0x3b, 0x8d, 0x9c,
+	0x5b, 0x19, 0xe2, 0x9f, 0x18, 0x98, 0xfc, 0x17, 0xf2, 0xe6, 0xbc, 0x5a, 0x76, 0x39, 0xdb, 0x28,
+	0x37, 0x97, 0x56, 0x47, 0xc7, 0xaf, 0x6e, 0xa9, 0xcf, 0x4d, 0x2a, 0xa9, 0x6b, 0x95, 0xc8, 0x36,
+	0x54, 0xfb, 0x02, 0xb9, 0xe7, 0x73, 0x0c, 0x30, 0x92, 0x21, 0xed, 0x8a, 0xda, 0xec, 0xb2, 0xd3,
+	0x28, 0x37, 0x6f, 0x8d, 0x1b, 0xee, 0x0b, 0xe4, 0xad, 0x91, 0x8a, 0x5b, 0xe9, 0xa7, 0x81, 0xfa,
+	0x0b, 0x07, 0xae, 0x9d, 0x0f, 0x4c, 0xc4, 0x2c, 0x12, 0x48, 0x9a, 0xb0, 0x14, 0xe1, 0x40, 0x7a,
+	0x7f, 0x88, 0x40, 0x45, 0x99, 0x75, 0xaf, 0x28, 0xe1, 0xd6, 0xb9, 0x28, 0xd6, 0xa0, 0x18, 0x33,
+	0x11, 0xca, 0x61, 0xa0, 0xe5, 0xe6, 0xd5, 0x71, 0x77, 0xda, 0x56, 0xe6, 0x26, 0x5a, 0xe4, 0x21,
+	0xe4, 0x90, 0x73, 0xc6, 0x6b, 0x59, 0xad, 0xbe, 0x98, 0x0a, 0x5b, 0x09, 0x5c, 0x23, 0xaf, 0xff,
+	0xe8, 0xc0, 0xed, 0x4e, 0xff, 0x40, 0xf8, 0x3c, 0x3c, 0xc0, 0xa1, 0xb3, 0xdb, 0x9c, 0x4d, 0x57,
+	0x89, 0x87, 0x50, 0xe9, 0x52, 0x21, 0x3d, 0xff, 0x18, 0xfd, 0x93, 0x98, 0x85, 0x91, 0xb4, 0x85,
+	0x58, 0x50, 0x70, 0x2b, 0x41, 0x2f, 0x4c, 0x6c, 0xf6, 0x35, 0x12, 0xfb, 0x5b, 0x16, 0xee, 0xbc,
+	0xc4, 0x5d, 0x9b, 0xdf, 0x27, 0x90, 0xd3, 0x1b, 0x6a, 0x5f, 0xcb, 0xcd, 0x1b, 0xe3, 0xdb, 0xbb,
+	0x28, 0x58, 0xf7, 0x14, 0x03, 0x5d, 0x78, 0xd7, 0xe8, 0x91, 0x7d, 0x28, 0x07, 0x9c, 0xc5, 0x1e,
+	0x47, 0x2a, 0x6c, 0x7e, 0x17, 0x9a, 0xff, 0x1f, 0x37, 0x9b, 0x78, 0xe0, 0xea, 0x26, 0x67, 0xb1,
+	0xab, 0x6d, 0x5d, 0x08, 0x92, 0xef, 0xe9, 0x2b, 0xf0, 0x22, 0x03, 0x30, 0xda, 0x83, 0x2c, 0xc2,
+	0xbc, 0xca, 0xc2, 0x4e, 0x14, 0xca, 0x90, 0x4a, 0x0c, 0xaa, 0x33, 0xe4, 0x2a, 0x54, 0x77, 0x99,
+	0x5c, 0xef, 0xcb, 0x63, 0x95, 0x06, 0x5f, 0xa3, 0x0e, 0xa9, 0xc2, 0xdc, 0xba, 0xef, 0xa3, 0x10,
+	0x9b, 0x18, 0x85, 0x18, 0x54, 0x33, 0x4a, 0x6f, 0xe8, 0x6a, 0x18, 0x1d, 0xe9, 0x43, 0xaa, 0x59,
+	0x52, 0x81, 0x72, 0x07, 0xf9, 0x29, 0x72, 0x03, 0xcc, 0x2a, 0xb5, 0x16, 0x8b, 0x22, 0xf4, 0x55,
+	0xa7, 0xb4, 0xba, 0x4c, 0x60, 0x50, 0xcd, 0xa9, 0xed, 0x5a, 0x54, 0xfa, 0xc7, 0xfb, 0xb1, 0xd1,
+	0xcb, 0x93, 0x5b, 0x70, 0xbd, 0xcd, 0x99, 0x3a, 0x21, 0x8c, 0x8e, 0x3e, 0xee, 0x63, 0x1f, 0x3f,
+	0x3a, 0x45, 0x7e, 0xd8, 0x65, 0xcf, 0xaa, 0x05, 0x72, 0x03, 0x96, 0x74, 0x16, 0xdf, 0xa3, 0x51,
+	0xd0, 0x45, 0xbe, 0x35, 0xf0, 0x31, 0x56, 0xfb, 0x55, 0x8b, 0x4a, 0xf4, 0x21, 0x1d, 0x24, 0x49,
+	0xe3, 0xc2, 0x45, 0xea, 0x1f, 0x63, 0x50, 0x2d, 0x91, 0x7b, 0x70, 0xa7, 0xad, 0x7a, 0x5a, 0x48,
+	0x8c, 0xa4, 0xd5, 0xd0, 0x66, 0x9b, 0xd8, 0x45, 0x15, 0x16, 0x90, 0x32, 0x14, 0xf6, 0xa3, 0x93,
+	0x88, 0x3d, 0x8b, 0xaa, 0x01, 0x99, 0x83, 0xe2, 0x2e, 0x93, 0xdb, 0xac, 0x1f, 0x05, 0x55, 0xac,
+	0xff, 0xea, 0xc0, 0xfd, 0x16, 0x47, 0x2a, 0xf1, 0xe2, 0x4d, 0x86, 0x2d, 0x7b, 0x0d, 0xf2, 0xa6,
+	0x43, 0x6d, 0xbf, 0xda, 0x15, 0xb9, 0x0d, 0xa5, 0x23, 0xce, 0xfa, 0xf1, 0x2e, 0xed, 0xa1, 0xae,
+	0x73, 0xc9, 0x1d, 0x01, 0x64, 0x1b, 0x8a, 0x02, 0xa5, 0x0c, 0xa3, 0xa3, 0x61, 0x6b, 0x3e, 0x4e,
+	0x5d, 0xb2, 0x0b, 0x8f, 0xec, 0x58, 0x0b, 0x37, 0xb1, 0x7d, 0x63, 0x33, 0x64, 0x05, 0x1e, 0x4c,
+	0x0e, 0xd6, 0xf4, 0x9f, 0xce, 0xca, 0x7e, 0x1c, 0xfc, 0x73, 0xb2, 0x32, 0x39, 0x58, 0x9b, 0x95,
+	0xef, 0x1d, 0xb8, 0x6f, 0x9a, 0xea, 0xcf, 0xc9, 0xca, 0x9b, 0x19, 0x67, 0x2b, 0xf0, 0x60, 0xb2,
+	0x93, 0x36, 0x9a, 0x9f, 0x1d, 0x58, 0xb1, 0x77, 0x76, 0x8f, 0xfd, 0x8d, 0x03, 0x22, 0x77, 0x01,
+	0x0e, 0xfa, 0x87, 0x87, 0xc8, 0x3b, 0xe1, 0x97, 0xa8, 0x0b, 0x9c, 0x73, 0xc7, 0x10, 0x52, 0x83,
+	0x02, 0xed, 0x4b, 0xb6, 0xee, 0x9f, 0xd4, 0x72, 0xcb, 0x4e, 0xa3, 0xe8, 0x0e, 0x97, 0xf5, 0xe7,
+	0xb3, 0xf0, 0xf0, 0xd2, 0x10, 0x5f, 0x77, 0xc6, 0x7b, 0x17, 0xcd, 0xf8, 0x77, 0xc6, 0xcd, 0xa6,
+	0x3c, 0xfa, 0xdf, 0x69, 0xff, 0x97, 0x4d, 0xfb, 0xe7, 0x0e, 0x94, 0x12, 0x86, 0x46, 0x6e, 0x40,
+	0xd1, 0x70, 0x49, 0xcb, 0x42, 0xe6, 0xdc, 0x82, 0x5e, 0xef, 0x04, 0xe4, 0x0e, 0x18, 0x4e, 0xe9,
+	0xc9, 0xb3, 0x38, 0x69, 0x6d, 0x8d, 0xec, 0x9d, 0xc5, 0x48, 0xae, 0x43, 0x21, 0x14, 0xde, 0xe7,
+	0xaa, 0xee, 0x59, 0xdd, 0x72, 0xf9, 0x50, 0xbc, 0xaf, 0x72, 0x4f, 0x60, 0x36, 0xa0, 0x92, 0xea,
+	0x2e, 0x9d, 0x73, 0xf5, 0x37, 0xb9, 0x09, 0xc5, 0x1e, 0x4a, 0xaa, 0xf1, 0x9c, 0xc6, 0x93, 0x75,
+	0x7d, 0x07, 0x2a, 0xe7, 0xfa, 0x5f, 0xa9, 0xab, 0x1b, 0x10, 0xa9, 0x3b, 0x65, 0xb9, 0xd1, 0x70,
+	0xad, 0x64, 0x31, 0x15, 0xe2, 0x19, 0xe3, 0x81, 0x75, 0x2a, 0x59, 0xd7, 0x3f, 0x83, 0x62, 0x7b,
+	0x44, 0xd5, 0x2a, 0x3e, 0xeb, 0xf5, 0x42, 0xe9, 0x25, 0x1c, 0xcf, 0x50, 0xc1, 0x05, 0x03, 0x27,
+	0x8a, 0x8f, 0xa0, 0x1a, 0x73, 0x8c, 0x29, 0x47, 0x2f, 0xc5, 0x06, 0xb3, 0x6e, 0xc5, 0xe2, 0x43,
+	0xd5, 0xfa, 0x13, 0xc8, 0xe9, 0xba, 0xaa, 0x18, 0x75, 0x56, 0x8c, 0x73, 0xfa, 0x5b, 0x63, 0x38,
+	0x90, 0xd6, 0x29, 0xfd, 0x5d, 0xff, 0x36, 0x03, 0xf3, 0x2e, 0xfa, 0x8c, 0x07, 0xf6, 0xe6, 0x90,
+	0x15, 0xa8, 0x0c, 0xc9, 0x7b, 0x9a, 0xfd, 0xcd, 0x6b, 0xb8, 0x33, 0xa4, 0x80, 0xe3, 0x85, 0xc9,
+	0xa4, 0x0b, 0x73, 0x0f, 0xe6, 0x8c, 0x28, 0xea, 0xf7, 0x0e, 0xd0, 0xdc, 0x8d, 0xac, 0x5b, 0xd6,
+	0xd8, 0xae, 0x86, 0xce, 0xd5, 0x6e, 0xf6, 0x7c, 0xed, 0x86, 0x25, 0xca, 0xbd, 0xa4, 0x44, 0xf9,
+	0x74, 0x89, 0xc6, 0x6b, 0x5d, 0x48, 0xd5, 0xba, 0x06, 0x05, 0x5f, 0xff, 0x98, 0x06, 0xb5, 0xa2,
+	0xf6, 0x62, 0xb8, 0x24, 0xf7, 0x61, 0xde, 0x7e, 0x7a, 0x18, 0x33, 0xff, 0xb8, 0x56, 0xd2, 0xf2,
+	0x39, 0x0b, 0x6e, 0x29, 0xac, 0xce, 0x55, 0x76, 0xc6, 0xe6, 0xca, 0x25, 0x13, 0x68, 0x2c, 0x8f,
+	0xc3, 0x09, 0xf4, 0xca, 0x14, 0xbe, 0xfe, 0xcb, 0x2c, 0xdc, 0x9d, 0xfc, 0xf3, 0x4a, 0x1a, 0x50,
+	0xe5, 0xc6, 0x2d, 0xaf, 0x1b, 0x46, 0x27, 0x9e, 0x64, 0x42, 0x3b, 0x54, 0x74, 0x17, 0x2c, 0xfe,
+	0x41, 0x18, 0x9d, 0xec, 0x31, 0xa1, 0xf2, 0x2c, 0x24, 0xe5, 0xd2, 0x3b, 0xe4, 0xac, 0x67, 0xbb,
+	0xa6, 0xa4, 0x11, 0xc5, 0x65, 0xcd, 0x8b, 0x4a, 0x72, 0xea, 0x09, 0x49, 0x65, 0x28, 0x64, 0xe8,
+	0x0b, 0x7b, 0x59, 0x2a, 0x1a, 0xef, 0x24, 0xb0, 0x6a, 0xd7, 0x1e, 0x0a, 0x41, 0x8f, 0xd0, 0x93,
+	0x61, 0x0f, 0x59, 0x5f, 0xea, 0xb2, 0x39, 0xee, 0x82, 0x85, 0xf7, 0x0c, 0xaa, 0x1a, 0xa8, 0x47,
+	0x07, 0x1e, 0x47, 0xc9, 0xcf, 0x3c, 0x9f, 0xf5, 0x23, 0xa9, 0xcb, 0x98, 0x73, 0xe7, 0x7b, 0x74,
+	0xe0, 0x2a, 0xb4, 0xa5, 0x40, 0x15, 0x44, 0x37, 0x3c, 0x45, 0xcf, 0xfc, 0x4a, 0x78, 0x42, 0xfd,
+	0x70, 0xe4, 0xed, 0x23, 0x22, 0x3c, 0xc5, 0x8d, 0xd1, 0x8f, 0xc7, 0x0a, 0x54, 0x38, 0xd2, 0xc0,
+	0x3b, 0x50, 0x93, 0xcb, 0x28, 0x16, 0xcc, 0x8e, 0x0a, 0xde, 0x50, 0xa8, 0xd6, 0x5b, 0x85, 0x2b,
+	0xc7, 0xa1, 0xca, 0xeb, 0x59, 0x6a, 0xd3, 0xa2, 0xd6, 0x5d, 0xb4, 0xa2, 0xb1, 0x7d, 0x1f, 0xc3,
+	0xa2, 0x7e, 0xc0, 0x78, 0xfa, 0xad, 0xe2, 0xd1, 0x43, 0x89, 0x5c, 0xb7, 0x81, 0xe3, 0x56, 0xb4,
+	0xa0, 0xad, 0xf0, 0x75, 0x05, 0x93, 0xff, 0xc1, 0x52, 0x2f, 0x8c, 0xbc, 0x71, 0x7d, 0x13, 0x1b,
+	0xe8, 0xdd, 0x49, 0x2f, 0x8c, 0x5a, 0x89, 0x89, 0x09, 0x50, 0x99, 0xd0, 0xc1, 0x05, 0x26, 0x65,
+	0x6b, 0x42, 0x07, 0xe7, 0x4d, 0xd6, 0xe0, 0xaa, 0x32, 0x11, 0xc9, 0x54, 0xb5, 0x16, 0x73, 0x89,
+	0xc5, 0x68, 0xe0, 0x1a, 0x8b, 0xb7, 0xe0, 0xba, 0x9a, 0x3a, 0x81, 0xe7, 0xb3, 0x48, 0xf4, 0x7b,
+	0x2a, 0x66, 0xc9, 0xa9, 0xc4, 0xa3, 0xb3, 0xda, 0xbc, 0xbe, 0x55, 0x4b, 0x5a, 0xdc, 0xb2, 0xd2,
+	0x8e, 0x15, 0x36, 0xbf, 0xca, 0x03, 0x6c, 0x99, 0x0b, 0xcd, 0x38, 0x92, 0x4f, 0x61, 0x21, 0xfd,
+	0x6e, 0x25, 0xf7, 0xc6, 0xdb, 0xf4, 0xc2, 0xc7, 0xfa, 0xcd, 0xfa, 0x24, 0x15, 0xcb, 0x60, 0x66,
+	0x08, 0x87, 0xa5, 0x0b, 0x1f, 0x52, 0xa4, 0x31, 0xc5, 0x5b, 0xcb, 0x1c, 0xf4, 0x68, 0xea, 0x57,
+	0x59, 0x7d, 0xa6, 0xe1, 0xac, 0x39, 0xe4, 0x6b, 0x07, 0x6e, 0x4f, 0x22, 0xd1, 0xe4, 0x49, 0x8a,
+	0x03, 0x5c, 0xfe, 0xb6, 0xb8, 0xb9, 0x36, 0xbd, 0x41, 0x12, 0xb9, 0xf2, 0x62, 0x12, 0x69, 0x4d,
+	0x7b, 0x31, 0x05, 0x97, 0x4f, 0x7b, 0x31, 0x15, 0x1f, 0x36, 0x5e, 0x4c, 0x22, 0x9b, 0x69, 0x2f,
+	0xa6, 0xe0, 0xce, 0x69, 0x2f, 0xa6, 0xe2, 0xb1, 0x33, 0xe4, 0x1b, 0x07, 0xfe, 0x73, 0x09, 0xd7,
+	0x22, 0xcd, 0x57, 0x22, 0x66, 0xc6, 0x97, 0xa7, 0xaf, 0x41, 0xe6, 0x4c, 0x93, 0x6c, 0xbc, 0x0d,
+	0xc4, 0x67, 0xbd, 0x71, 0x7b, 0x1e, 0xfb, 0x1b, 0xe5, 0x77, 0xdd, 0x76, 0x6b, 0xab, 0xd3, 0xe6,
+	0x4c, 0xb2, 0xb6, 0xf3, 0x5d, 0x26, 0xb3, 0xd5, 0xf9, 0x21, 0xb3, 0x30, 0xba, 0x2a, 0xab, 0x6e,
+	0xbb, 0x75, 0x90, 0xd7, 0xff, 0x69, 0x3d, 0xfd, 0x3d, 0x00, 0x00, 0xff, 0xff, 0xae, 0xaf, 0xe4,
+	0x52, 0xe8, 0x12, 0x00, 0x00,
 }

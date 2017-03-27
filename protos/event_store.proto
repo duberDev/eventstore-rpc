@@ -9,88 +9,166 @@ option objc_class_prefix = "ES";
 package eventstore;
 
 service EventStore {
-	rpc AppendToStream(AppendToStreamRequest) returns (AppendToStreamResponse) {}
-	rpc SubscribeToStreamFrom(stream SubscribeToStreamFromRequest) returns (stream SubscribeToStreamFromResponse) {}
+    rpc AppendToStream(AppendToStreamRequest) returns (AppendToStreamResponse) {}
+    rpc SubscribeToStreamFrom(stream SubscribeToStreamFromRequest) returns (stream SubscribeToStreamFromResponse) {}
+    rpc CreatePersistentSubscription(CreatePersistentSubscriptionRequest) returns (CreatePersistentSubscriptionResponse) {}
+    rpc UpdatePersistentSubscription(UpdatePersistentSubscriptionRequest) returns (UpdatePersistentSubscriptionResponse) {}
+    rpc DeletePersistentSubscription(DeletePersistentSubscriptionRequest) returns (DeletePersistentSubscriptionResponse) {}
+    rpc ConnectToPersistentSubscription(stream ConnectToPersistentSubscriptionRequest) returns (stream ConnectToPersistentSubscriptionResponse) {}
 }
 
 message AppendToStreamRequest {
-	string stream_id = 1;
-	int32 expected_version = 2;
-	repeated EventData events = 3;
-	UserCredentials user_credentials = 4;
+    string stream_id = 1;
+    int32 expected_version = 2;
+    repeated EventData events = 3;
+    UserCredentials user_credentials = 4;
 }
 
 message AppendToStreamResponse {
-	int32 next_expected_version = 1;
-	Position position = 2;
-	Error error = 3;
+    int64 next_expected_version = 1;
+    Position position = 2;
+    Error error = 3;
 }
 
 message SubscribeToStreamFromRequest {
-	string stream_id = 1;
-	int32 last_checkpoint = 2;
-	UserCredentials user_credentials = 3;
+    string stream_id = 1;
+    int32 last_checkpoint = 2;
+    UserCredentials user_credentials = 3;
 }
 
 message SubscribeToStreamFromResponse {
-	enum DropReason {
-		UserInitiated = 0;
-		NotAuthenticated = 1;
-		AccessDenied = 2;
-		SubscribingError = 3;
-		ServerError = 4;
-		ConnectionClosed = 5;
-		CatchUpError = 6;
-		ProcessingQueueOverflow = 7;
-		EventHandlerException = 8;
-		MaxSubscribersReached = 9;
-		PersistentSubscriptionDeleted = 10;
-		Unknown = 100;
-		NotFound = 101;
-	}
-	ResolvedEvent event = 1;
-	DropReason drop_reason = 2;
-	Error error = 3;
+    enum DropReason {
+        UserInitiated = 0;
+        NotAuthenticated = 1;
+        AccessDenied = 2;
+        SubscribingError = 3;
+        ServerError = 4;
+        ConnectionClosed = 5;
+        CatchUpError = 6;
+        ProcessingQueueOverflow = 7;
+        EventHandlerException = 8;
+        MaxSubscribersReached = 9;
+        PersistentSubscriptionDeleted = 10;
+        Unknown = 100;
+        NotFound = 101;
+    }
+    ResolvedEvent event = 1;
+    DropReason drop_reason = 2;
+    Error error = 3;
+}
+
+message CreatePersistentSubscriptionRequest {
+    string stream = 1;
+    string groupName = 2;
+    PersistentSubscriptionSettings settings = 3;
+    UserCredentials user_credentials = 4;
+}
+
+message CreatePersistentSubscriptionResponse {
+}
+
+message UpdatePersistentSubscriptionRequest {
+    string stream = 1;
+    string groupName = 2;
+    PersistentSubscriptionSettings settings = 3;
+    UserCredentials user_credentials = 4;
+}
+
+message UpdatePersistentSubscriptionResponse {
+}
+
+message DeletePersistentSubscriptionRequest {
+    string stream = 1;
+    string groupName = 2;
+    UserCredentials user_credentials = 3;
+}
+
+message DeletePersistentSubscriptionResponse {
+}
+
+message ConnectToPersistentSubscriptionRequest {
+    string stream = 1;
+    string groupName = 2;
+    UserCredentials user_credentials = 3;
+    int32 bufferSize = 4;
+    bool autoAck = 5;
+}
+
+message ConnectToPersistentSubscriptionResponse {
+    enum DropReason {
+        UserInitiated = 0;
+        NotAuthenticated = 1;
+        AccessDenied = 2;
+        SubscribingError = 3;
+        ServerError = 4;
+        ConnectionClosed = 5;
+        CatchUpError = 6;
+        ProcessingQueueOverflow = 7;
+        EventHandlerException = 8;
+        MaxSubscribersReached = 9;
+        PersistentSubscriptionDeleted = 10;
+        Unknown = 100;
+        NotFound = 101;
+    }
+    ResolvedEvent event = 1;
+    DropReason drop_reason = 2;
+    Error error = 3;
 }
 
 //
 
 message EventData {
-	bytes event_id = 1;
-	string event_type = 2;
-	bool is_json = 3;
-	bytes data = 4;
-	bytes metadata = 5;
+    bytes event_id = 1;
+    string event_type = 2;
+    bool is_json = 3;
+    bytes data = 4;
+    bytes metadata = 5;
 }
 
 message UserCredentials {
-	string username = 1;
-	string password = 2;
+    string username = 1;
+    string password = 2;
 }
 
 message Position {
-	int64 commit_position = 1;
-	int64 prepare_position = 2;
+    int64 commit_position = 1;
+    int64 prepare_position = 2;
 }
 
 message Error {
-	string type = 1;
-	string text = 2;
+    string type = 1;
+    string text = 2;
 }
 
 message RecordedEvent {
-	string event_stream_id = 1;
-	bytes event_id = 2;
-	int32 event_number = 3;
-	string event_type = 4;
-	bytes data = 5;
-	bytes metadata = 6;
-	bool is_json = 7;
-	int64 created = 8;
-	int64 created_epoch = 9;
+    string event_stream_id = 1;
+    bytes event_id = 2;
+    int64 event_number = 3;
+    string event_type = 4;
+    bytes data = 5;
+    bytes metadata = 6;
+    bool is_json = 7;
+    int64 created = 8;
+    int64 created_epoch = 9;
 }
 
 message ResolvedEvent {
-	RecordedEvent event = 1;
-	Position position = 2;
+    RecordedEvent event = 1;
+    Position position = 2;
+}
+
+message PersistentSubscriptionSettings {
+    bool resolve_link_tos = 1;
+    int64 start_from = 2;
+    bool extra_statistics = 3;
+    double message_timeout = 4;
+    int32 max_retry_count = 5;
+    int32 live_buffer_size = 6;
+    int32 read_batch_size = 7;
+    int32 history_buffer_size = 8;
+    double check_point_after = 9;
+    int32 min_check_point_count = 10;
+    int32 max_check_point_count = 11;
+    int32 max_subscriber_count = 12;
+    string named_consumer_strategy = 13;
 }

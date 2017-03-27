@@ -39,5 +39,40 @@ namespace EventStore.RPC.Server
                     throw new ArgumentOutOfRangeException(nameof(dropReason), dropReason, null);
             }
         }
+
+        public static ConnectToPersistentSubscriptionResponse.Types.DropReason ToPersistentSubscriptionDropReason(this SubscriptionDropReason dropReason)
+        {
+            switch (dropReason)
+            {
+                case SubscriptionDropReason.UserInitiated:
+                    return ConnectToPersistentSubscriptionResponse.Types.DropReason.UserInitiated;
+                case SubscriptionDropReason.NotAuthenticated:
+                    return ConnectToPersistentSubscriptionResponse.Types.DropReason.NotAuthenticated;
+                case SubscriptionDropReason.AccessDenied:
+                    return ConnectToPersistentSubscriptionResponse.Types.DropReason.AccessDenied;
+                case SubscriptionDropReason.SubscribingError:
+                    return ConnectToPersistentSubscriptionResponse.Types.DropReason.SubscribingError;
+                case SubscriptionDropReason.ServerError:
+                    return ConnectToPersistentSubscriptionResponse.Types.DropReason.ServerError;
+                case SubscriptionDropReason.ConnectionClosed:
+                    return ConnectToPersistentSubscriptionResponse.Types.DropReason.ConnectionClosed;
+                case SubscriptionDropReason.CatchUpError:
+                    return ConnectToPersistentSubscriptionResponse.Types.DropReason.CatchUpError;
+                case SubscriptionDropReason.ProcessingQueueOverflow:
+                    return ConnectToPersistentSubscriptionResponse.Types.DropReason.ProcessingQueueOverflow;
+                case SubscriptionDropReason.EventHandlerException:
+                    return ConnectToPersistentSubscriptionResponse.Types.DropReason.EventHandlerException;
+                case SubscriptionDropReason.MaxSubscribersReached:
+                    return ConnectToPersistentSubscriptionResponse.Types.DropReason.MaxSubscribersReached;
+                case SubscriptionDropReason.PersistentSubscriptionDeleted:
+                    return ConnectToPersistentSubscriptionResponse.Types.DropReason.PersistentSubscriptionDeleted;
+                case SubscriptionDropReason.Unknown:
+                    return ConnectToPersistentSubscriptionResponse.Types.DropReason.Unknown;
+                case SubscriptionDropReason.NotFound:
+                    return ConnectToPersistentSubscriptionResponse.Types.DropReason.NotFound;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(dropReason), dropReason, null);
+            }
+        }
     }
 }

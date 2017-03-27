@@ -5,7 +5,7 @@ setlocal
 @rem enter this directory
 cd /d %~dp0
 
-set TOOLS_PATH=packages\Grpc.Tools.1.1.0\tools\windows_x86
+set TOOLS_PATH=packages\Grpc.Tools.1.2.0\tools\windows_x86
 
 %TOOLS_PATH%\protoc.exe -I../protos --csharp_out EventStore.RPC ../protos/event_store.proto --grpc_out EventStore.RPC --plugin=protoc-gen-grpc=%TOOLS_PATH%\grpc_csharp_plugin.exe
 

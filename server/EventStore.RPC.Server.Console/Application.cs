@@ -41,10 +41,10 @@ namespace EventStore.RPC.Server.Console
             _eventStoreConnection.ConnectAsync().Wait();
 
             GrpcEnvironment.SetLogger(new GrpcLog4Net("GRPC"));
-            _server = new Grpc.Core.Server()
+            _server = new Grpc.Core.Server
             {
                 Services = {EventStore.BindService(new EventStoreImpl(_eventStoreConnection))},
-                Ports = {new ServerPort(RpcHost, Convert.ToInt32(RpcPort), ServerCredentials.Insecure)},
+                Ports = {new ServerPort(RpcHost, Convert.ToInt32(RpcPort), ServerCredentials.Insecure)}
             };
 
             _server.Start();

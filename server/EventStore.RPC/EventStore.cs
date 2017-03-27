@@ -27,7 +27,7 @@ namespace EventStore.RPC {
             "ZXJzaW9uGAIgASgFEiUKBmV2ZW50cxgDIAMoCzIVLmV2ZW50c3RvcmUuRXZl",
             "bnREYXRhEjUKEHVzZXJfY3JlZGVudGlhbHMYBCABKAsyGy5ldmVudHN0b3Jl",
             "LlVzZXJDcmVkZW50aWFscyKBAQoWQXBwZW5kVG9TdHJlYW1SZXNwb25zZRId",
-            "ChVuZXh0X2V4cGVjdGVkX3ZlcnNpb24YASABKAUSJgoIcG9zaXRpb24YAiAB",
+            "ChVuZXh0X2V4cGVjdGVkX3ZlcnNpb24YASABKAMSJgoIcG9zaXRpb24YAiAB",
             "KAsyFC5ldmVudHN0b3JlLlBvc2l0aW9uEiAKBWVycm9yGAMgASgLMhEuZXZl",
             "bnRzdG9yZS5FcnJvciKBAQocU3Vic2NyaWJlVG9TdHJlYW1Gcm9tUmVxdWVz",
             "dBIRCglzdHJlYW1faWQYASABKAkSFwoPbGFzdF9jaGVja3BvaW50GAIgASgF",
@@ -42,26 +42,76 @@ namespace EventStore.RPC {
             "bmVjdGlvbkNsb3NlZBAFEhAKDENhdGNoVXBFcnJvchAGEhsKF1Byb2Nlc3Np",
             "bmdRdWV1ZU92ZXJmbG93EAcSGQoVRXZlbnRIYW5kbGVyRXhjZXB0aW9uEAgS",
             "GQoVTWF4U3Vic2NyaWJlcnNSZWFjaGVkEAkSIQodUGVyc2lzdGVudFN1YnNj",
-            "cmlwdGlvbkRlbGV0ZWQQChILCgdVbmtub3duEGQSDAoITm90Rm91bmQQZSJi",
-            "CglFdmVudERhdGESEAoIZXZlbnRfaWQYASABKAwSEgoKZXZlbnRfdHlwZRgC",
-            "IAEoCRIPCgdpc19qc29uGAMgASgIEgwKBGRhdGEYBCABKAwSEAoIbWV0YWRh",
-            "dGEYBSABKAwiNQoPVXNlckNyZWRlbnRpYWxzEhAKCHVzZXJuYW1lGAEgASgJ",
-            "EhAKCHBhc3N3b3JkGAIgASgJIj0KCFBvc2l0aW9uEhcKD2NvbW1pdF9wb3Np",
-            "dGlvbhgBIAEoAxIYChBwcmVwYXJlX3Bvc2l0aW9uGAIgASgDIiMKBUVycm9y",
-            "EgwKBHR5cGUYASABKAkSDAoEdGV4dBgCIAEoCSK9AQoNUmVjb3JkZWRFdmVu",
-            "dBIXCg9ldmVudF9zdHJlYW1faWQYASABKAkSEAoIZXZlbnRfaWQYAiABKAwS",
-            "FAoMZXZlbnRfbnVtYmVyGAMgASgFEhIKCmV2ZW50X3R5cGUYBCABKAkSDAoE",
-            "ZGF0YRgFIAEoDBIQCghtZXRhZGF0YRgGIAEoDBIPCgdpc19qc29uGAcgASgI",
-            "Eg8KB2NyZWF0ZWQYCCABKAMSFQoNY3JlYXRlZF9lcG9jaBgJIAEoAyJhCg1S",
-            "ZXNvbHZlZEV2ZW50EigKBWV2ZW50GAEgASgLMhkuZXZlbnRzdG9yZS5SZWNv",
-            "cmRlZEV2ZW50EiYKCHBvc2l0aW9uGAIgASgLMhQuZXZlbnRzdG9yZS5Qb3Np",
-            "dGlvbjLbAQoKRXZlbnRTdG9yZRJZCg5BcHBlbmRUb1N0cmVhbRIhLmV2ZW50",
-            "c3RvcmUuQXBwZW5kVG9TdHJlYW1SZXF1ZXN0GiIuZXZlbnRzdG9yZS5BcHBl",
-            "bmRUb1N0cmVhbVJlc3BvbnNlIgAScgoVU3Vic2NyaWJlVG9TdHJlYW1Gcm9t",
-            "EiguZXZlbnRzdG9yZS5TdWJzY3JpYmVUb1N0cmVhbUZyb21SZXF1ZXN0Giku",
-            "ZXZlbnRzdG9yZS5TdWJzY3JpYmVUb1N0cmVhbUZyb21SZXNwb25zZSIAKAEw",
-            "AUI5ChJjb20uZXZlbnRzdG9yZS5ycGNCC0dSUENFU1Byb3RvUAGiAgJFU6oC",
-            "DkV2ZW50U3RvcmUuUlBDYgZwcm90bzM="));
+            "cmlwdGlvbkRlbGV0ZWQQChILCgdVbmtub3duEGQSDAoITm90Rm91bmQQZSK9",
+            "AQojQ3JlYXRlUGVyc2lzdGVudFN1YnNjcmlwdGlvblJlcXVlc3QSDgoGc3Ry",
+            "ZWFtGAEgASgJEhEKCWdyb3VwTmFtZRgCIAEoCRI8CghzZXR0aW5ncxgDIAEo",
+            "CzIqLmV2ZW50c3RvcmUuUGVyc2lzdGVudFN1YnNjcmlwdGlvblNldHRpbmdz",
+            "EjUKEHVzZXJfY3JlZGVudGlhbHMYBCABKAsyGy5ldmVudHN0b3JlLlVzZXJD",
+            "cmVkZW50aWFscyImCiRDcmVhdGVQZXJzaXN0ZW50U3Vic2NyaXB0aW9uUmVz",
+            "cG9uc2UivQEKI1VwZGF0ZVBlcnNpc3RlbnRTdWJzY3JpcHRpb25SZXF1ZXN0",
+            "Eg4KBnN0cmVhbRgBIAEoCRIRCglncm91cE5hbWUYAiABKAkSPAoIc2V0dGlu",
+            "Z3MYAyABKAsyKi5ldmVudHN0b3JlLlBlcnNpc3RlbnRTdWJzY3JpcHRpb25T",
+            "ZXR0aW5ncxI1ChB1c2VyX2NyZWRlbnRpYWxzGAQgASgLMhsuZXZlbnRzdG9y",
+            "ZS5Vc2VyQ3JlZGVudGlhbHMiJgokVXBkYXRlUGVyc2lzdGVudFN1YnNjcmlw",
+            "dGlvblJlc3BvbnNlIn8KI0RlbGV0ZVBlcnNpc3RlbnRTdWJzY3JpcHRpb25S",
+            "ZXF1ZXN0Eg4KBnN0cmVhbRgBIAEoCRIRCglncm91cE5hbWUYAiABKAkSNQoQ",
+            "dXNlcl9jcmVkZW50aWFscxgDIAEoCzIbLmV2ZW50c3RvcmUuVXNlckNyZWRl",
+            "bnRpYWxzIiYKJERlbGV0ZVBlcnNpc3RlbnRTdWJzY3JpcHRpb25SZXNwb25z",
+            "ZSKnAQomQ29ubmVjdFRvUGVyc2lzdGVudFN1YnNjcmlwdGlvblJlcXVlc3QS",
+            "DgoGc3RyZWFtGAEgASgJEhEKCWdyb3VwTmFtZRgCIAEoCRI1ChB1c2VyX2Ny",
+            "ZWRlbnRpYWxzGAMgASgLMhsuZXZlbnRzdG9yZS5Vc2VyQ3JlZGVudGlhbHMS",
+            "EgoKYnVmZmVyU2l6ZRgEIAEoBRIPCgdhdXRvQWNrGAUgASgIIvQDCidDb25u",
+            "ZWN0VG9QZXJzaXN0ZW50U3Vic2NyaXB0aW9uUmVzcG9uc2USKAoFZXZlbnQY",
+            "ASABKAsyGS5ldmVudHN0b3JlLlJlc29sdmVkRXZlbnQSUwoLZHJvcF9yZWFz",
+            "b24YAiABKA4yPi5ldmVudHN0b3JlLkNvbm5lY3RUb1BlcnNpc3RlbnRTdWJz",
+            "Y3JpcHRpb25SZXNwb25zZS5Ecm9wUmVhc29uEiAKBWVycm9yGAMgASgLMhEu",
+            "ZXZlbnRzdG9yZS5FcnJvciKnAgoKRHJvcFJlYXNvbhIRCg1Vc2VySW5pdGlh",
+            "dGVkEAASFAoQTm90QXV0aGVudGljYXRlZBABEhAKDEFjY2Vzc0RlbmllZBAC",
+            "EhQKEFN1YnNjcmliaW5nRXJyb3IQAxIPCgtTZXJ2ZXJFcnJvchAEEhQKEENv",
+            "bm5lY3Rpb25DbG9zZWQQBRIQCgxDYXRjaFVwRXJyb3IQBhIbChdQcm9jZXNz",
+            "aW5nUXVldWVPdmVyZmxvdxAHEhkKFUV2ZW50SGFuZGxlckV4Y2VwdGlvbhAI",
+            "EhkKFU1heFN1YnNjcmliZXJzUmVhY2hlZBAJEiEKHVBlcnNpc3RlbnRTdWJz",
+            "Y3JpcHRpb25EZWxldGVkEAoSCwoHVW5rbm93bhBkEgwKCE5vdEZvdW5kEGUi",
+            "YgoJRXZlbnREYXRhEhAKCGV2ZW50X2lkGAEgASgMEhIKCmV2ZW50X3R5cGUY",
+            "AiABKAkSDwoHaXNfanNvbhgDIAEoCBIMCgRkYXRhGAQgASgMEhAKCG1ldGFk",
+            "YXRhGAUgASgMIjUKD1VzZXJDcmVkZW50aWFscxIQCgh1c2VybmFtZRgBIAEo",
+            "CRIQCghwYXNzd29yZBgCIAEoCSI9CghQb3NpdGlvbhIXCg9jb21taXRfcG9z",
+            "aXRpb24YASABKAMSGAoQcHJlcGFyZV9wb3NpdGlvbhgCIAEoAyIjCgVFcnJv",
+            "chIMCgR0eXBlGAEgASgJEgwKBHRleHQYAiABKAkivQEKDVJlY29yZGVkRXZl",
+            "bnQSFwoPZXZlbnRfc3RyZWFtX2lkGAEgASgJEhAKCGV2ZW50X2lkGAIgASgM",
+            "EhQKDGV2ZW50X251bWJlchgDIAEoAxISCgpldmVudF90eXBlGAQgASgJEgwK",
+            "BGRhdGEYBSABKAwSEAoIbWV0YWRhdGEYBiABKAwSDwoHaXNfanNvbhgHIAEo",
+            "CBIPCgdjcmVhdGVkGAggASgDEhUKDWNyZWF0ZWRfZXBvY2gYCSABKAMiYQoN",
+            "UmVzb2x2ZWRFdmVudBIoCgVldmVudBgBIAEoCzIZLmV2ZW50c3RvcmUuUmVj",
+            "b3JkZWRFdmVudBImCghwb3NpdGlvbhgCIAEoCzIULmV2ZW50c3RvcmUuUG9z",
+            "aXRpb24iggMKHlBlcnNpc3RlbnRTdWJzY3JpcHRpb25TZXR0aW5ncxIYChBy",
+            "ZXNvbHZlX2xpbmtfdG9zGAEgASgIEhIKCnN0YXJ0X2Zyb20YAiABKAMSGAoQ",
+            "ZXh0cmFfc3RhdGlzdGljcxgDIAEoCBIXCg9tZXNzYWdlX3RpbWVvdXQYBCAB",
+            "KAESFwoPbWF4X3JldHJ5X2NvdW50GAUgASgFEhgKEGxpdmVfYnVmZmVyX3Np",
+            "emUYBiABKAUSFwoPcmVhZF9iYXRjaF9zaXplGAcgASgFEhsKE2hpc3Rvcnlf",
+            "YnVmZmVyX3NpemUYCCABKAUSGQoRY2hlY2tfcG9pbnRfYWZ0ZXIYCSABKAES",
+            "HQoVbWluX2NoZWNrX3BvaW50X2NvdW50GAogASgFEh0KFW1heF9jaGVja19w",
+            "b2ludF9jb3VudBgLIAEoBRIcChRtYXhfc3Vic2NyaWJlcl9jb3VudBgMIAEo",
+            "BRIfChduYW1lZF9jb25zdW1lcl9zdHJhdGVneRgNIAEoCTKABgoKRXZlbnRT",
+            "dG9yZRJZCg5BcHBlbmRUb1N0cmVhbRIhLmV2ZW50c3RvcmUuQXBwZW5kVG9T",
+            "dHJlYW1SZXF1ZXN0GiIuZXZlbnRzdG9yZS5BcHBlbmRUb1N0cmVhbVJlc3Bv",
+            "bnNlIgAScgoVU3Vic2NyaWJlVG9TdHJlYW1Gcm9tEiguZXZlbnRzdG9yZS5T",
+            "dWJzY3JpYmVUb1N0cmVhbUZyb21SZXF1ZXN0GikuZXZlbnRzdG9yZS5TdWJz",
+            "Y3JpYmVUb1N0cmVhbUZyb21SZXNwb25zZSIAKAEwARKDAQocQ3JlYXRlUGVy",
+            "c2lzdGVudFN1YnNjcmlwdGlvbhIvLmV2ZW50c3RvcmUuQ3JlYXRlUGVyc2lz",
+            "dGVudFN1YnNjcmlwdGlvblJlcXVlc3QaMC5ldmVudHN0b3JlLkNyZWF0ZVBl",
+            "cnNpc3RlbnRTdWJzY3JpcHRpb25SZXNwb25zZSIAEoMBChxVcGRhdGVQZXJz",
+            "aXN0ZW50U3Vic2NyaXB0aW9uEi8uZXZlbnRzdG9yZS5VcGRhdGVQZXJzaXN0",
+            "ZW50U3Vic2NyaXB0aW9uUmVxdWVzdBowLmV2ZW50c3RvcmUuVXBkYXRlUGVy",
+            "c2lzdGVudFN1YnNjcmlwdGlvblJlc3BvbnNlIgASgwEKHERlbGV0ZVBlcnNp",
+            "c3RlbnRTdWJzY3JpcHRpb24SLy5ldmVudHN0b3JlLkRlbGV0ZVBlcnNpc3Rl",
+            "bnRTdWJzY3JpcHRpb25SZXF1ZXN0GjAuZXZlbnRzdG9yZS5EZWxldGVQZXJz",
+            "aXN0ZW50U3Vic2NyaXB0aW9uUmVzcG9uc2UiABKQAQofQ29ubmVjdFRvUGVy",
+            "c2lzdGVudFN1YnNjcmlwdGlvbhIyLmV2ZW50c3RvcmUuQ29ubmVjdFRvUGVy",
+            "c2lzdGVudFN1YnNjcmlwdGlvblJlcXVlc3QaMy5ldmVudHN0b3JlLkNvbm5l",
+            "Y3RUb1BlcnNpc3RlbnRTdWJzY3JpcHRpb25SZXNwb25zZSIAKAEwAUI5ChJj",
+            "b20uZXZlbnRzdG9yZS5ycGNCC0dSUENFU1Byb3RvUAGiAgJFU6oCDkV2ZW50",
+            "U3RvcmUuUlBDYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
@@ -69,12 +119,21 @@ namespace EventStore.RPC {
             new pbr::GeneratedClrTypeInfo(typeof(global::EventStore.RPC.AppendToStreamResponse), global::EventStore.RPC.AppendToStreamResponse.Parser, new[]{ "NextExpectedVersion", "Position", "Error" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::EventStore.RPC.SubscribeToStreamFromRequest), global::EventStore.RPC.SubscribeToStreamFromRequest.Parser, new[]{ "StreamId", "LastCheckpoint", "UserCredentials" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::EventStore.RPC.SubscribeToStreamFromResponse), global::EventStore.RPC.SubscribeToStreamFromResponse.Parser, new[]{ "Event", "DropReason", "Error" }, null, new[]{ typeof(global::EventStore.RPC.SubscribeToStreamFromResponse.Types.DropReason) }, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::EventStore.RPC.CreatePersistentSubscriptionRequest), global::EventStore.RPC.CreatePersistentSubscriptionRequest.Parser, new[]{ "Stream", "GroupName", "Settings", "UserCredentials" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::EventStore.RPC.CreatePersistentSubscriptionResponse), global::EventStore.RPC.CreatePersistentSubscriptionResponse.Parser, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::EventStore.RPC.UpdatePersistentSubscriptionRequest), global::EventStore.RPC.UpdatePersistentSubscriptionRequest.Parser, new[]{ "Stream", "GroupName", "Settings", "UserCredentials" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::EventStore.RPC.UpdatePersistentSubscriptionResponse), global::EventStore.RPC.UpdatePersistentSubscriptionResponse.Parser, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::EventStore.RPC.DeletePersistentSubscriptionRequest), global::EventStore.RPC.DeletePersistentSubscriptionRequest.Parser, new[]{ "Stream", "GroupName", "UserCredentials" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::EventStore.RPC.DeletePersistentSubscriptionResponse), global::EventStore.RPC.DeletePersistentSubscriptionResponse.Parser, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::EventStore.RPC.ConnectToPersistentSubscriptionRequest), global::EventStore.RPC.ConnectToPersistentSubscriptionRequest.Parser, new[]{ "Stream", "GroupName", "UserCredentials", "BufferSize", "AutoAck" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::EventStore.RPC.ConnectToPersistentSubscriptionResponse), global::EventStore.RPC.ConnectToPersistentSubscriptionResponse.Parser, new[]{ "Event", "DropReason", "Error" }, null, new[]{ typeof(global::EventStore.RPC.ConnectToPersistentSubscriptionResponse.Types.DropReason) }, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::EventStore.RPC.EventData), global::EventStore.RPC.EventData.Parser, new[]{ "EventId", "EventType", "IsJson", "Data", "Metadata" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::EventStore.RPC.UserCredentials), global::EventStore.RPC.UserCredentials.Parser, new[]{ "Username", "Password" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::EventStore.RPC.Position), global::EventStore.RPC.Position.Parser, new[]{ "CommitPosition", "PreparePosition" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::EventStore.RPC.Error), global::EventStore.RPC.Error.Parser, new[]{ "Type", "Text" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::EventStore.RPC.RecordedEvent), global::EventStore.RPC.RecordedEvent.Parser, new[]{ "EventStreamId", "EventId", "EventNumber", "EventType", "Data", "Metadata", "IsJson", "Created", "CreatedEpoch" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::EventStore.RPC.ResolvedEvent), global::EventStore.RPC.ResolvedEvent.Parser, new[]{ "Event", "Position" }, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::EventStore.RPC.ResolvedEvent), global::EventStore.RPC.ResolvedEvent.Parser, new[]{ "Event", "Position" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::EventStore.RPC.PersistentSubscriptionSettings), global::EventStore.RPC.PersistentSubscriptionSettings.Parser, new[]{ "ResolveLinkTos", "StartFrom", "ExtraStatistics", "MessageTimeout", "MaxRetryCount", "LiveBufferSize", "ReadBatchSize", "HistoryBufferSize", "CheckPointAfter", "MinCheckPointCount", "MaxCheckPointCount", "MaxSubscriberCount", "NamedConsumerStrategy" }, null, null, null)
           }));
     }
     #endregion
@@ -316,9 +375,9 @@ namespace EventStore.RPC {
 
     /// <summary>Field number for the "next_expected_version" field.</summary>
     public const int NextExpectedVersionFieldNumber = 1;
-    private int nextExpectedVersion_;
+    private long nextExpectedVersion_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int NextExpectedVersion {
+    public long NextExpectedVersion {
       get { return nextExpectedVersion_; }
       set {
         nextExpectedVersion_ = value;
@@ -369,7 +428,7 @@ namespace EventStore.RPC {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (NextExpectedVersion != 0) hash ^= NextExpectedVersion.GetHashCode();
+      if (NextExpectedVersion != 0L) hash ^= NextExpectedVersion.GetHashCode();
       if (position_ != null) hash ^= Position.GetHashCode();
       if (error_ != null) hash ^= Error.GetHashCode();
       return hash;
@@ -382,9 +441,9 @@ namespace EventStore.RPC {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
-      if (NextExpectedVersion != 0) {
+      if (NextExpectedVersion != 0L) {
         output.WriteRawTag(8);
-        output.WriteInt32(NextExpectedVersion);
+        output.WriteInt64(NextExpectedVersion);
       }
       if (position_ != null) {
         output.WriteRawTag(18);
@@ -399,8 +458,8 @@ namespace EventStore.RPC {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      if (NextExpectedVersion != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(NextExpectedVersion);
+      if (NextExpectedVersion != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(NextExpectedVersion);
       }
       if (position_ != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(Position);
@@ -416,7 +475,7 @@ namespace EventStore.RPC {
       if (other == null) {
         return;
       }
-      if (other.NextExpectedVersion != 0) {
+      if (other.NextExpectedVersion != 0L) {
         NextExpectedVersion = other.NextExpectedVersion;
       }
       if (other.position_ != null) {
@@ -442,7 +501,7 @@ namespace EventStore.RPC {
             input.SkipLastField();
             break;
           case 8: {
-            NextExpectedVersion = input.ReadInt32();
+            NextExpectedVersion = input.ReadInt64();
             break;
           }
           case 18: {
@@ -852,6 +911,1321 @@ namespace EventStore.RPC {
 
   }
 
+  public sealed partial class CreatePersistentSubscriptionRequest : pb::IMessage<CreatePersistentSubscriptionRequest> {
+    private static readonly pb::MessageParser<CreatePersistentSubscriptionRequest> _parser = new pb::MessageParser<CreatePersistentSubscriptionRequest>(() => new CreatePersistentSubscriptionRequest());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<CreatePersistentSubscriptionRequest> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::EventStore.RPC.EventStoreReflection.Descriptor.MessageTypes[4]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public CreatePersistentSubscriptionRequest() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public CreatePersistentSubscriptionRequest(CreatePersistentSubscriptionRequest other) : this() {
+      stream_ = other.stream_;
+      groupName_ = other.groupName_;
+      Settings = other.settings_ != null ? other.Settings.Clone() : null;
+      UserCredentials = other.userCredentials_ != null ? other.UserCredentials.Clone() : null;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public CreatePersistentSubscriptionRequest Clone() {
+      return new CreatePersistentSubscriptionRequest(this);
+    }
+
+    /// <summary>Field number for the "stream" field.</summary>
+    public const int StreamFieldNumber = 1;
+    private string stream_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Stream {
+      get { return stream_; }
+      set {
+        stream_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "groupName" field.</summary>
+    public const int GroupNameFieldNumber = 2;
+    private string groupName_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string GroupName {
+      get { return groupName_; }
+      set {
+        groupName_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "settings" field.</summary>
+    public const int SettingsFieldNumber = 3;
+    private global::EventStore.RPC.PersistentSubscriptionSettings settings_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::EventStore.RPC.PersistentSubscriptionSettings Settings {
+      get { return settings_; }
+      set {
+        settings_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "user_credentials" field.</summary>
+    public const int UserCredentialsFieldNumber = 4;
+    private global::EventStore.RPC.UserCredentials userCredentials_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::EventStore.RPC.UserCredentials UserCredentials {
+      get { return userCredentials_; }
+      set {
+        userCredentials_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as CreatePersistentSubscriptionRequest);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(CreatePersistentSubscriptionRequest other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Stream != other.Stream) return false;
+      if (GroupName != other.GroupName) return false;
+      if (!object.Equals(Settings, other.Settings)) return false;
+      if (!object.Equals(UserCredentials, other.UserCredentials)) return false;
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Stream.Length != 0) hash ^= Stream.GetHashCode();
+      if (GroupName.Length != 0) hash ^= GroupName.GetHashCode();
+      if (settings_ != null) hash ^= Settings.GetHashCode();
+      if (userCredentials_ != null) hash ^= UserCredentials.GetHashCode();
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (Stream.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(Stream);
+      }
+      if (GroupName.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(GroupName);
+      }
+      if (settings_ != null) {
+        output.WriteRawTag(26);
+        output.WriteMessage(Settings);
+      }
+      if (userCredentials_ != null) {
+        output.WriteRawTag(34);
+        output.WriteMessage(UserCredentials);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (Stream.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Stream);
+      }
+      if (GroupName.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(GroupName);
+      }
+      if (settings_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Settings);
+      }
+      if (userCredentials_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(UserCredentials);
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(CreatePersistentSubscriptionRequest other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Stream.Length != 0) {
+        Stream = other.Stream;
+      }
+      if (other.GroupName.Length != 0) {
+        GroupName = other.GroupName;
+      }
+      if (other.settings_ != null) {
+        if (settings_ == null) {
+          settings_ = new global::EventStore.RPC.PersistentSubscriptionSettings();
+        }
+        Settings.MergeFrom(other.Settings);
+      }
+      if (other.userCredentials_ != null) {
+        if (userCredentials_ == null) {
+          userCredentials_ = new global::EventStore.RPC.UserCredentials();
+        }
+        UserCredentials.MergeFrom(other.UserCredentials);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 10: {
+            Stream = input.ReadString();
+            break;
+          }
+          case 18: {
+            GroupName = input.ReadString();
+            break;
+          }
+          case 26: {
+            if (settings_ == null) {
+              settings_ = new global::EventStore.RPC.PersistentSubscriptionSettings();
+            }
+            input.ReadMessage(settings_);
+            break;
+          }
+          case 34: {
+            if (userCredentials_ == null) {
+              userCredentials_ = new global::EventStore.RPC.UserCredentials();
+            }
+            input.ReadMessage(userCredentials_);
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class CreatePersistentSubscriptionResponse : pb::IMessage<CreatePersistentSubscriptionResponse> {
+    private static readonly pb::MessageParser<CreatePersistentSubscriptionResponse> _parser = new pb::MessageParser<CreatePersistentSubscriptionResponse>(() => new CreatePersistentSubscriptionResponse());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<CreatePersistentSubscriptionResponse> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::EventStore.RPC.EventStoreReflection.Descriptor.MessageTypes[5]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public CreatePersistentSubscriptionResponse() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public CreatePersistentSubscriptionResponse(CreatePersistentSubscriptionResponse other) : this() {
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public CreatePersistentSubscriptionResponse Clone() {
+      return new CreatePersistentSubscriptionResponse(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as CreatePersistentSubscriptionResponse);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(CreatePersistentSubscriptionResponse other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(CreatePersistentSubscriptionResponse other) {
+      if (other == null) {
+        return;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class UpdatePersistentSubscriptionRequest : pb::IMessage<UpdatePersistentSubscriptionRequest> {
+    private static readonly pb::MessageParser<UpdatePersistentSubscriptionRequest> _parser = new pb::MessageParser<UpdatePersistentSubscriptionRequest>(() => new UpdatePersistentSubscriptionRequest());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<UpdatePersistentSubscriptionRequest> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::EventStore.RPC.EventStoreReflection.Descriptor.MessageTypes[6]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public UpdatePersistentSubscriptionRequest() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public UpdatePersistentSubscriptionRequest(UpdatePersistentSubscriptionRequest other) : this() {
+      stream_ = other.stream_;
+      groupName_ = other.groupName_;
+      Settings = other.settings_ != null ? other.Settings.Clone() : null;
+      UserCredentials = other.userCredentials_ != null ? other.UserCredentials.Clone() : null;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public UpdatePersistentSubscriptionRequest Clone() {
+      return new UpdatePersistentSubscriptionRequest(this);
+    }
+
+    /// <summary>Field number for the "stream" field.</summary>
+    public const int StreamFieldNumber = 1;
+    private string stream_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Stream {
+      get { return stream_; }
+      set {
+        stream_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "groupName" field.</summary>
+    public const int GroupNameFieldNumber = 2;
+    private string groupName_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string GroupName {
+      get { return groupName_; }
+      set {
+        groupName_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "settings" field.</summary>
+    public const int SettingsFieldNumber = 3;
+    private global::EventStore.RPC.PersistentSubscriptionSettings settings_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::EventStore.RPC.PersistentSubscriptionSettings Settings {
+      get { return settings_; }
+      set {
+        settings_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "user_credentials" field.</summary>
+    public const int UserCredentialsFieldNumber = 4;
+    private global::EventStore.RPC.UserCredentials userCredentials_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::EventStore.RPC.UserCredentials UserCredentials {
+      get { return userCredentials_; }
+      set {
+        userCredentials_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as UpdatePersistentSubscriptionRequest);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(UpdatePersistentSubscriptionRequest other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Stream != other.Stream) return false;
+      if (GroupName != other.GroupName) return false;
+      if (!object.Equals(Settings, other.Settings)) return false;
+      if (!object.Equals(UserCredentials, other.UserCredentials)) return false;
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Stream.Length != 0) hash ^= Stream.GetHashCode();
+      if (GroupName.Length != 0) hash ^= GroupName.GetHashCode();
+      if (settings_ != null) hash ^= Settings.GetHashCode();
+      if (userCredentials_ != null) hash ^= UserCredentials.GetHashCode();
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (Stream.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(Stream);
+      }
+      if (GroupName.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(GroupName);
+      }
+      if (settings_ != null) {
+        output.WriteRawTag(26);
+        output.WriteMessage(Settings);
+      }
+      if (userCredentials_ != null) {
+        output.WriteRawTag(34);
+        output.WriteMessage(UserCredentials);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (Stream.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Stream);
+      }
+      if (GroupName.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(GroupName);
+      }
+      if (settings_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Settings);
+      }
+      if (userCredentials_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(UserCredentials);
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(UpdatePersistentSubscriptionRequest other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Stream.Length != 0) {
+        Stream = other.Stream;
+      }
+      if (other.GroupName.Length != 0) {
+        GroupName = other.GroupName;
+      }
+      if (other.settings_ != null) {
+        if (settings_ == null) {
+          settings_ = new global::EventStore.RPC.PersistentSubscriptionSettings();
+        }
+        Settings.MergeFrom(other.Settings);
+      }
+      if (other.userCredentials_ != null) {
+        if (userCredentials_ == null) {
+          userCredentials_ = new global::EventStore.RPC.UserCredentials();
+        }
+        UserCredentials.MergeFrom(other.UserCredentials);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 10: {
+            Stream = input.ReadString();
+            break;
+          }
+          case 18: {
+            GroupName = input.ReadString();
+            break;
+          }
+          case 26: {
+            if (settings_ == null) {
+              settings_ = new global::EventStore.RPC.PersistentSubscriptionSettings();
+            }
+            input.ReadMessage(settings_);
+            break;
+          }
+          case 34: {
+            if (userCredentials_ == null) {
+              userCredentials_ = new global::EventStore.RPC.UserCredentials();
+            }
+            input.ReadMessage(userCredentials_);
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class UpdatePersistentSubscriptionResponse : pb::IMessage<UpdatePersistentSubscriptionResponse> {
+    private static readonly pb::MessageParser<UpdatePersistentSubscriptionResponse> _parser = new pb::MessageParser<UpdatePersistentSubscriptionResponse>(() => new UpdatePersistentSubscriptionResponse());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<UpdatePersistentSubscriptionResponse> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::EventStore.RPC.EventStoreReflection.Descriptor.MessageTypes[7]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public UpdatePersistentSubscriptionResponse() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public UpdatePersistentSubscriptionResponse(UpdatePersistentSubscriptionResponse other) : this() {
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public UpdatePersistentSubscriptionResponse Clone() {
+      return new UpdatePersistentSubscriptionResponse(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as UpdatePersistentSubscriptionResponse);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(UpdatePersistentSubscriptionResponse other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(UpdatePersistentSubscriptionResponse other) {
+      if (other == null) {
+        return;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class DeletePersistentSubscriptionRequest : pb::IMessage<DeletePersistentSubscriptionRequest> {
+    private static readonly pb::MessageParser<DeletePersistentSubscriptionRequest> _parser = new pb::MessageParser<DeletePersistentSubscriptionRequest>(() => new DeletePersistentSubscriptionRequest());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<DeletePersistentSubscriptionRequest> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::EventStore.RPC.EventStoreReflection.Descriptor.MessageTypes[8]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public DeletePersistentSubscriptionRequest() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public DeletePersistentSubscriptionRequest(DeletePersistentSubscriptionRequest other) : this() {
+      stream_ = other.stream_;
+      groupName_ = other.groupName_;
+      UserCredentials = other.userCredentials_ != null ? other.UserCredentials.Clone() : null;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public DeletePersistentSubscriptionRequest Clone() {
+      return new DeletePersistentSubscriptionRequest(this);
+    }
+
+    /// <summary>Field number for the "stream" field.</summary>
+    public const int StreamFieldNumber = 1;
+    private string stream_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Stream {
+      get { return stream_; }
+      set {
+        stream_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "groupName" field.</summary>
+    public const int GroupNameFieldNumber = 2;
+    private string groupName_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string GroupName {
+      get { return groupName_; }
+      set {
+        groupName_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "user_credentials" field.</summary>
+    public const int UserCredentialsFieldNumber = 3;
+    private global::EventStore.RPC.UserCredentials userCredentials_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::EventStore.RPC.UserCredentials UserCredentials {
+      get { return userCredentials_; }
+      set {
+        userCredentials_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as DeletePersistentSubscriptionRequest);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(DeletePersistentSubscriptionRequest other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Stream != other.Stream) return false;
+      if (GroupName != other.GroupName) return false;
+      if (!object.Equals(UserCredentials, other.UserCredentials)) return false;
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Stream.Length != 0) hash ^= Stream.GetHashCode();
+      if (GroupName.Length != 0) hash ^= GroupName.GetHashCode();
+      if (userCredentials_ != null) hash ^= UserCredentials.GetHashCode();
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (Stream.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(Stream);
+      }
+      if (GroupName.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(GroupName);
+      }
+      if (userCredentials_ != null) {
+        output.WriteRawTag(26);
+        output.WriteMessage(UserCredentials);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (Stream.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Stream);
+      }
+      if (GroupName.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(GroupName);
+      }
+      if (userCredentials_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(UserCredentials);
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(DeletePersistentSubscriptionRequest other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Stream.Length != 0) {
+        Stream = other.Stream;
+      }
+      if (other.GroupName.Length != 0) {
+        GroupName = other.GroupName;
+      }
+      if (other.userCredentials_ != null) {
+        if (userCredentials_ == null) {
+          userCredentials_ = new global::EventStore.RPC.UserCredentials();
+        }
+        UserCredentials.MergeFrom(other.UserCredentials);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 10: {
+            Stream = input.ReadString();
+            break;
+          }
+          case 18: {
+            GroupName = input.ReadString();
+            break;
+          }
+          case 26: {
+            if (userCredentials_ == null) {
+              userCredentials_ = new global::EventStore.RPC.UserCredentials();
+            }
+            input.ReadMessage(userCredentials_);
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class DeletePersistentSubscriptionResponse : pb::IMessage<DeletePersistentSubscriptionResponse> {
+    private static readonly pb::MessageParser<DeletePersistentSubscriptionResponse> _parser = new pb::MessageParser<DeletePersistentSubscriptionResponse>(() => new DeletePersistentSubscriptionResponse());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<DeletePersistentSubscriptionResponse> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::EventStore.RPC.EventStoreReflection.Descriptor.MessageTypes[9]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public DeletePersistentSubscriptionResponse() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public DeletePersistentSubscriptionResponse(DeletePersistentSubscriptionResponse other) : this() {
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public DeletePersistentSubscriptionResponse Clone() {
+      return new DeletePersistentSubscriptionResponse(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as DeletePersistentSubscriptionResponse);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(DeletePersistentSubscriptionResponse other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(DeletePersistentSubscriptionResponse other) {
+      if (other == null) {
+        return;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class ConnectToPersistentSubscriptionRequest : pb::IMessage<ConnectToPersistentSubscriptionRequest> {
+    private static readonly pb::MessageParser<ConnectToPersistentSubscriptionRequest> _parser = new pb::MessageParser<ConnectToPersistentSubscriptionRequest>(() => new ConnectToPersistentSubscriptionRequest());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<ConnectToPersistentSubscriptionRequest> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::EventStore.RPC.EventStoreReflection.Descriptor.MessageTypes[10]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ConnectToPersistentSubscriptionRequest() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ConnectToPersistentSubscriptionRequest(ConnectToPersistentSubscriptionRequest other) : this() {
+      stream_ = other.stream_;
+      groupName_ = other.groupName_;
+      UserCredentials = other.userCredentials_ != null ? other.UserCredentials.Clone() : null;
+      bufferSize_ = other.bufferSize_;
+      autoAck_ = other.autoAck_;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ConnectToPersistentSubscriptionRequest Clone() {
+      return new ConnectToPersistentSubscriptionRequest(this);
+    }
+
+    /// <summary>Field number for the "stream" field.</summary>
+    public const int StreamFieldNumber = 1;
+    private string stream_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Stream {
+      get { return stream_; }
+      set {
+        stream_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "groupName" field.</summary>
+    public const int GroupNameFieldNumber = 2;
+    private string groupName_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string GroupName {
+      get { return groupName_; }
+      set {
+        groupName_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "user_credentials" field.</summary>
+    public const int UserCredentialsFieldNumber = 3;
+    private global::EventStore.RPC.UserCredentials userCredentials_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::EventStore.RPC.UserCredentials UserCredentials {
+      get { return userCredentials_; }
+      set {
+        userCredentials_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "bufferSize" field.</summary>
+    public const int BufferSizeFieldNumber = 4;
+    private int bufferSize_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int BufferSize {
+      get { return bufferSize_; }
+      set {
+        bufferSize_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "autoAck" field.</summary>
+    public const int AutoAckFieldNumber = 5;
+    private bool autoAck_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool AutoAck {
+      get { return autoAck_; }
+      set {
+        autoAck_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as ConnectToPersistentSubscriptionRequest);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(ConnectToPersistentSubscriptionRequest other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Stream != other.Stream) return false;
+      if (GroupName != other.GroupName) return false;
+      if (!object.Equals(UserCredentials, other.UserCredentials)) return false;
+      if (BufferSize != other.BufferSize) return false;
+      if (AutoAck != other.AutoAck) return false;
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Stream.Length != 0) hash ^= Stream.GetHashCode();
+      if (GroupName.Length != 0) hash ^= GroupName.GetHashCode();
+      if (userCredentials_ != null) hash ^= UserCredentials.GetHashCode();
+      if (BufferSize != 0) hash ^= BufferSize.GetHashCode();
+      if (AutoAck != false) hash ^= AutoAck.GetHashCode();
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (Stream.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(Stream);
+      }
+      if (GroupName.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(GroupName);
+      }
+      if (userCredentials_ != null) {
+        output.WriteRawTag(26);
+        output.WriteMessage(UserCredentials);
+      }
+      if (BufferSize != 0) {
+        output.WriteRawTag(32);
+        output.WriteInt32(BufferSize);
+      }
+      if (AutoAck != false) {
+        output.WriteRawTag(40);
+        output.WriteBool(AutoAck);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (Stream.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Stream);
+      }
+      if (GroupName.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(GroupName);
+      }
+      if (userCredentials_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(UserCredentials);
+      }
+      if (BufferSize != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(BufferSize);
+      }
+      if (AutoAck != false) {
+        size += 1 + 1;
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(ConnectToPersistentSubscriptionRequest other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Stream.Length != 0) {
+        Stream = other.Stream;
+      }
+      if (other.GroupName.Length != 0) {
+        GroupName = other.GroupName;
+      }
+      if (other.userCredentials_ != null) {
+        if (userCredentials_ == null) {
+          userCredentials_ = new global::EventStore.RPC.UserCredentials();
+        }
+        UserCredentials.MergeFrom(other.UserCredentials);
+      }
+      if (other.BufferSize != 0) {
+        BufferSize = other.BufferSize;
+      }
+      if (other.AutoAck != false) {
+        AutoAck = other.AutoAck;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 10: {
+            Stream = input.ReadString();
+            break;
+          }
+          case 18: {
+            GroupName = input.ReadString();
+            break;
+          }
+          case 26: {
+            if (userCredentials_ == null) {
+              userCredentials_ = new global::EventStore.RPC.UserCredentials();
+            }
+            input.ReadMessage(userCredentials_);
+            break;
+          }
+          case 32: {
+            BufferSize = input.ReadInt32();
+            break;
+          }
+          case 40: {
+            AutoAck = input.ReadBool();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class ConnectToPersistentSubscriptionResponse : pb::IMessage<ConnectToPersistentSubscriptionResponse> {
+    private static readonly pb::MessageParser<ConnectToPersistentSubscriptionResponse> _parser = new pb::MessageParser<ConnectToPersistentSubscriptionResponse>(() => new ConnectToPersistentSubscriptionResponse());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<ConnectToPersistentSubscriptionResponse> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::EventStore.RPC.EventStoreReflection.Descriptor.MessageTypes[11]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ConnectToPersistentSubscriptionResponse() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ConnectToPersistentSubscriptionResponse(ConnectToPersistentSubscriptionResponse other) : this() {
+      Event = other.event_ != null ? other.Event.Clone() : null;
+      dropReason_ = other.dropReason_;
+      Error = other.error_ != null ? other.Error.Clone() : null;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ConnectToPersistentSubscriptionResponse Clone() {
+      return new ConnectToPersistentSubscriptionResponse(this);
+    }
+
+    /// <summary>Field number for the "event" field.</summary>
+    public const int EventFieldNumber = 1;
+    private global::EventStore.RPC.ResolvedEvent event_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::EventStore.RPC.ResolvedEvent Event {
+      get { return event_; }
+      set {
+        event_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "drop_reason" field.</summary>
+    public const int DropReasonFieldNumber = 2;
+    private global::EventStore.RPC.ConnectToPersistentSubscriptionResponse.Types.DropReason dropReason_ = 0;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::EventStore.RPC.ConnectToPersistentSubscriptionResponse.Types.DropReason DropReason {
+      get { return dropReason_; }
+      set {
+        dropReason_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "error" field.</summary>
+    public const int ErrorFieldNumber = 3;
+    private global::EventStore.RPC.Error error_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::EventStore.RPC.Error Error {
+      get { return error_; }
+      set {
+        error_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as ConnectToPersistentSubscriptionResponse);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(ConnectToPersistentSubscriptionResponse other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (!object.Equals(Event, other.Event)) return false;
+      if (DropReason != other.DropReason) return false;
+      if (!object.Equals(Error, other.Error)) return false;
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (event_ != null) hash ^= Event.GetHashCode();
+      if (DropReason != 0) hash ^= DropReason.GetHashCode();
+      if (error_ != null) hash ^= Error.GetHashCode();
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (event_ != null) {
+        output.WriteRawTag(10);
+        output.WriteMessage(Event);
+      }
+      if (DropReason != 0) {
+        output.WriteRawTag(16);
+        output.WriteEnum((int) DropReason);
+      }
+      if (error_ != null) {
+        output.WriteRawTag(26);
+        output.WriteMessage(Error);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (event_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Event);
+      }
+      if (DropReason != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) DropReason);
+      }
+      if (error_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Error);
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(ConnectToPersistentSubscriptionResponse other) {
+      if (other == null) {
+        return;
+      }
+      if (other.event_ != null) {
+        if (event_ == null) {
+          event_ = new global::EventStore.RPC.ResolvedEvent();
+        }
+        Event.MergeFrom(other.Event);
+      }
+      if (other.DropReason != 0) {
+        DropReason = other.DropReason;
+      }
+      if (other.error_ != null) {
+        if (error_ == null) {
+          error_ = new global::EventStore.RPC.Error();
+        }
+        Error.MergeFrom(other.Error);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 10: {
+            if (event_ == null) {
+              event_ = new global::EventStore.RPC.ResolvedEvent();
+            }
+            input.ReadMessage(event_);
+            break;
+          }
+          case 16: {
+            dropReason_ = (global::EventStore.RPC.ConnectToPersistentSubscriptionResponse.Types.DropReason) input.ReadEnum();
+            break;
+          }
+          case 26: {
+            if (error_ == null) {
+              error_ = new global::EventStore.RPC.Error();
+            }
+            input.ReadMessage(error_);
+            break;
+          }
+        }
+      }
+    }
+
+    #region Nested types
+    /// <summary>Container for nested types declared in the ConnectToPersistentSubscriptionResponse message type.</summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static partial class Types {
+      public enum DropReason {
+        [pbr::OriginalName("UserInitiated")] UserInitiated = 0,
+        [pbr::OriginalName("NotAuthenticated")] NotAuthenticated = 1,
+        [pbr::OriginalName("AccessDenied")] AccessDenied = 2,
+        [pbr::OriginalName("SubscribingError")] SubscribingError = 3,
+        [pbr::OriginalName("ServerError")] ServerError = 4,
+        [pbr::OriginalName("ConnectionClosed")] ConnectionClosed = 5,
+        [pbr::OriginalName("CatchUpError")] CatchUpError = 6,
+        [pbr::OriginalName("ProcessingQueueOverflow")] ProcessingQueueOverflow = 7,
+        [pbr::OriginalName("EventHandlerException")] EventHandlerException = 8,
+        [pbr::OriginalName("MaxSubscribersReached")] MaxSubscribersReached = 9,
+        [pbr::OriginalName("PersistentSubscriptionDeleted")] PersistentSubscriptionDeleted = 10,
+        [pbr::OriginalName("Unknown")] Unknown = 100,
+        [pbr::OriginalName("NotFound")] NotFound = 101,
+      }
+
+    }
+    #endregion
+
+  }
+
   public sealed partial class EventData : pb::IMessage<EventData> {
     private static readonly pb::MessageParser<EventData> _parser = new pb::MessageParser<EventData>(() => new EventData());
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -859,7 +2233,7 @@ namespace EventStore.RPC {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::EventStore.RPC.EventStoreReflection.Descriptor.MessageTypes[4]; }
+      get { return global::EventStore.RPC.EventStoreReflection.Descriptor.MessageTypes[12]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1088,7 +2462,7 @@ namespace EventStore.RPC {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::EventStore.RPC.EventStoreReflection.Descriptor.MessageTypes[5]; }
+      get { return global::EventStore.RPC.EventStoreReflection.Descriptor.MessageTypes[13]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1233,7 +2607,7 @@ namespace EventStore.RPC {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::EventStore.RPC.EventStoreReflection.Descriptor.MessageTypes[6]; }
+      get { return global::EventStore.RPC.EventStoreReflection.Descriptor.MessageTypes[14]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1378,7 +2752,7 @@ namespace EventStore.RPC {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::EventStore.RPC.EventStoreReflection.Descriptor.MessageTypes[7]; }
+      get { return global::EventStore.RPC.EventStoreReflection.Descriptor.MessageTypes[15]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1523,7 +2897,7 @@ namespace EventStore.RPC {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::EventStore.RPC.EventStoreReflection.Descriptor.MessageTypes[8]; }
+      get { return global::EventStore.RPC.EventStoreReflection.Descriptor.MessageTypes[16]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1580,9 +2954,9 @@ namespace EventStore.RPC {
 
     /// <summary>Field number for the "event_number" field.</summary>
     public const int EventNumberFieldNumber = 3;
-    private int eventNumber_;
+    private long eventNumber_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int EventNumber {
+    public long EventNumber {
       get { return eventNumber_; }
       set {
         eventNumber_ = value;
@@ -1685,7 +3059,7 @@ namespace EventStore.RPC {
       int hash = 1;
       if (EventStreamId.Length != 0) hash ^= EventStreamId.GetHashCode();
       if (EventId.Length != 0) hash ^= EventId.GetHashCode();
-      if (EventNumber != 0) hash ^= EventNumber.GetHashCode();
+      if (EventNumber != 0L) hash ^= EventNumber.GetHashCode();
       if (EventType.Length != 0) hash ^= EventType.GetHashCode();
       if (Data.Length != 0) hash ^= Data.GetHashCode();
       if (Metadata.Length != 0) hash ^= Metadata.GetHashCode();
@@ -1710,9 +3084,9 @@ namespace EventStore.RPC {
         output.WriteRawTag(18);
         output.WriteBytes(EventId);
       }
-      if (EventNumber != 0) {
+      if (EventNumber != 0L) {
         output.WriteRawTag(24);
-        output.WriteInt32(EventNumber);
+        output.WriteInt64(EventNumber);
       }
       if (EventType.Length != 0) {
         output.WriteRawTag(34);
@@ -1749,8 +3123,8 @@ namespace EventStore.RPC {
       if (EventId.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeBytesSize(EventId);
       }
-      if (EventNumber != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(EventNumber);
+      if (EventNumber != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(EventNumber);
       }
       if (EventType.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(EventType);
@@ -1784,7 +3158,7 @@ namespace EventStore.RPC {
       if (other.EventId.Length != 0) {
         EventId = other.EventId;
       }
-      if (other.EventNumber != 0) {
+      if (other.EventNumber != 0L) {
         EventNumber = other.EventNumber;
       }
       if (other.EventType.Length != 0) {
@@ -1824,7 +3198,7 @@ namespace EventStore.RPC {
             break;
           }
           case 24: {
-            EventNumber = input.ReadInt32();
+            EventNumber = input.ReadInt64();
             break;
           }
           case 34: {
@@ -1864,7 +3238,7 @@ namespace EventStore.RPC {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::EventStore.RPC.EventStoreReflection.Descriptor.MessageTypes[9]; }
+      get { return global::EventStore.RPC.EventStoreReflection.Descriptor.MessageTypes[17]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -2006,6 +3380,459 @@ namespace EventStore.RPC {
               position_ = new global::EventStore.RPC.Position();
             }
             input.ReadMessage(position_);
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class PersistentSubscriptionSettings : pb::IMessage<PersistentSubscriptionSettings> {
+    private static readonly pb::MessageParser<PersistentSubscriptionSettings> _parser = new pb::MessageParser<PersistentSubscriptionSettings>(() => new PersistentSubscriptionSettings());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<PersistentSubscriptionSettings> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::EventStore.RPC.EventStoreReflection.Descriptor.MessageTypes[18]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public PersistentSubscriptionSettings() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public PersistentSubscriptionSettings(PersistentSubscriptionSettings other) : this() {
+      resolveLinkTos_ = other.resolveLinkTos_;
+      startFrom_ = other.startFrom_;
+      extraStatistics_ = other.extraStatistics_;
+      messageTimeout_ = other.messageTimeout_;
+      maxRetryCount_ = other.maxRetryCount_;
+      liveBufferSize_ = other.liveBufferSize_;
+      readBatchSize_ = other.readBatchSize_;
+      historyBufferSize_ = other.historyBufferSize_;
+      checkPointAfter_ = other.checkPointAfter_;
+      minCheckPointCount_ = other.minCheckPointCount_;
+      maxCheckPointCount_ = other.maxCheckPointCount_;
+      maxSubscriberCount_ = other.maxSubscriberCount_;
+      namedConsumerStrategy_ = other.namedConsumerStrategy_;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public PersistentSubscriptionSettings Clone() {
+      return new PersistentSubscriptionSettings(this);
+    }
+
+    /// <summary>Field number for the "resolve_link_tos" field.</summary>
+    public const int ResolveLinkTosFieldNumber = 1;
+    private bool resolveLinkTos_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool ResolveLinkTos {
+      get { return resolveLinkTos_; }
+      set {
+        resolveLinkTos_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "start_from" field.</summary>
+    public const int StartFromFieldNumber = 2;
+    private long startFrom_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public long StartFrom {
+      get { return startFrom_; }
+      set {
+        startFrom_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "extra_statistics" field.</summary>
+    public const int ExtraStatisticsFieldNumber = 3;
+    private bool extraStatistics_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool ExtraStatistics {
+      get { return extraStatistics_; }
+      set {
+        extraStatistics_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "message_timeout" field.</summary>
+    public const int MessageTimeoutFieldNumber = 4;
+    private double messageTimeout_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public double MessageTimeout {
+      get { return messageTimeout_; }
+      set {
+        messageTimeout_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "max_retry_count" field.</summary>
+    public const int MaxRetryCountFieldNumber = 5;
+    private int maxRetryCount_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int MaxRetryCount {
+      get { return maxRetryCount_; }
+      set {
+        maxRetryCount_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "live_buffer_size" field.</summary>
+    public const int LiveBufferSizeFieldNumber = 6;
+    private int liveBufferSize_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int LiveBufferSize {
+      get { return liveBufferSize_; }
+      set {
+        liveBufferSize_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "read_batch_size" field.</summary>
+    public const int ReadBatchSizeFieldNumber = 7;
+    private int readBatchSize_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int ReadBatchSize {
+      get { return readBatchSize_; }
+      set {
+        readBatchSize_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "history_buffer_size" field.</summary>
+    public const int HistoryBufferSizeFieldNumber = 8;
+    private int historyBufferSize_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int HistoryBufferSize {
+      get { return historyBufferSize_; }
+      set {
+        historyBufferSize_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "check_point_after" field.</summary>
+    public const int CheckPointAfterFieldNumber = 9;
+    private double checkPointAfter_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public double CheckPointAfter {
+      get { return checkPointAfter_; }
+      set {
+        checkPointAfter_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "min_check_point_count" field.</summary>
+    public const int MinCheckPointCountFieldNumber = 10;
+    private int minCheckPointCount_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int MinCheckPointCount {
+      get { return minCheckPointCount_; }
+      set {
+        minCheckPointCount_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "max_check_point_count" field.</summary>
+    public const int MaxCheckPointCountFieldNumber = 11;
+    private int maxCheckPointCount_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int MaxCheckPointCount {
+      get { return maxCheckPointCount_; }
+      set {
+        maxCheckPointCount_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "max_subscriber_count" field.</summary>
+    public const int MaxSubscriberCountFieldNumber = 12;
+    private int maxSubscriberCount_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int MaxSubscriberCount {
+      get { return maxSubscriberCount_; }
+      set {
+        maxSubscriberCount_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "named_consumer_strategy" field.</summary>
+    public const int NamedConsumerStrategyFieldNumber = 13;
+    private string namedConsumerStrategy_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string NamedConsumerStrategy {
+      get { return namedConsumerStrategy_; }
+      set {
+        namedConsumerStrategy_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as PersistentSubscriptionSettings);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(PersistentSubscriptionSettings other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (ResolveLinkTos != other.ResolveLinkTos) return false;
+      if (StartFrom != other.StartFrom) return false;
+      if (ExtraStatistics != other.ExtraStatistics) return false;
+      if (MessageTimeout != other.MessageTimeout) return false;
+      if (MaxRetryCount != other.MaxRetryCount) return false;
+      if (LiveBufferSize != other.LiveBufferSize) return false;
+      if (ReadBatchSize != other.ReadBatchSize) return false;
+      if (HistoryBufferSize != other.HistoryBufferSize) return false;
+      if (CheckPointAfter != other.CheckPointAfter) return false;
+      if (MinCheckPointCount != other.MinCheckPointCount) return false;
+      if (MaxCheckPointCount != other.MaxCheckPointCount) return false;
+      if (MaxSubscriberCount != other.MaxSubscriberCount) return false;
+      if (NamedConsumerStrategy != other.NamedConsumerStrategy) return false;
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (ResolveLinkTos != false) hash ^= ResolveLinkTos.GetHashCode();
+      if (StartFrom != 0L) hash ^= StartFrom.GetHashCode();
+      if (ExtraStatistics != false) hash ^= ExtraStatistics.GetHashCode();
+      if (MessageTimeout != 0D) hash ^= MessageTimeout.GetHashCode();
+      if (MaxRetryCount != 0) hash ^= MaxRetryCount.GetHashCode();
+      if (LiveBufferSize != 0) hash ^= LiveBufferSize.GetHashCode();
+      if (ReadBatchSize != 0) hash ^= ReadBatchSize.GetHashCode();
+      if (HistoryBufferSize != 0) hash ^= HistoryBufferSize.GetHashCode();
+      if (CheckPointAfter != 0D) hash ^= CheckPointAfter.GetHashCode();
+      if (MinCheckPointCount != 0) hash ^= MinCheckPointCount.GetHashCode();
+      if (MaxCheckPointCount != 0) hash ^= MaxCheckPointCount.GetHashCode();
+      if (MaxSubscriberCount != 0) hash ^= MaxSubscriberCount.GetHashCode();
+      if (NamedConsumerStrategy.Length != 0) hash ^= NamedConsumerStrategy.GetHashCode();
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (ResolveLinkTos != false) {
+        output.WriteRawTag(8);
+        output.WriteBool(ResolveLinkTos);
+      }
+      if (StartFrom != 0L) {
+        output.WriteRawTag(16);
+        output.WriteInt64(StartFrom);
+      }
+      if (ExtraStatistics != false) {
+        output.WriteRawTag(24);
+        output.WriteBool(ExtraStatistics);
+      }
+      if (MessageTimeout != 0D) {
+        output.WriteRawTag(33);
+        output.WriteDouble(MessageTimeout);
+      }
+      if (MaxRetryCount != 0) {
+        output.WriteRawTag(40);
+        output.WriteInt32(MaxRetryCount);
+      }
+      if (LiveBufferSize != 0) {
+        output.WriteRawTag(48);
+        output.WriteInt32(LiveBufferSize);
+      }
+      if (ReadBatchSize != 0) {
+        output.WriteRawTag(56);
+        output.WriteInt32(ReadBatchSize);
+      }
+      if (HistoryBufferSize != 0) {
+        output.WriteRawTag(64);
+        output.WriteInt32(HistoryBufferSize);
+      }
+      if (CheckPointAfter != 0D) {
+        output.WriteRawTag(73);
+        output.WriteDouble(CheckPointAfter);
+      }
+      if (MinCheckPointCount != 0) {
+        output.WriteRawTag(80);
+        output.WriteInt32(MinCheckPointCount);
+      }
+      if (MaxCheckPointCount != 0) {
+        output.WriteRawTag(88);
+        output.WriteInt32(MaxCheckPointCount);
+      }
+      if (MaxSubscriberCount != 0) {
+        output.WriteRawTag(96);
+        output.WriteInt32(MaxSubscriberCount);
+      }
+      if (NamedConsumerStrategy.Length != 0) {
+        output.WriteRawTag(106);
+        output.WriteString(NamedConsumerStrategy);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (ResolveLinkTos != false) {
+        size += 1 + 1;
+      }
+      if (StartFrom != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(StartFrom);
+      }
+      if (ExtraStatistics != false) {
+        size += 1 + 1;
+      }
+      if (MessageTimeout != 0D) {
+        size += 1 + 8;
+      }
+      if (MaxRetryCount != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(MaxRetryCount);
+      }
+      if (LiveBufferSize != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(LiveBufferSize);
+      }
+      if (ReadBatchSize != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(ReadBatchSize);
+      }
+      if (HistoryBufferSize != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(HistoryBufferSize);
+      }
+      if (CheckPointAfter != 0D) {
+        size += 1 + 8;
+      }
+      if (MinCheckPointCount != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(MinCheckPointCount);
+      }
+      if (MaxCheckPointCount != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(MaxCheckPointCount);
+      }
+      if (MaxSubscriberCount != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(MaxSubscriberCount);
+      }
+      if (NamedConsumerStrategy.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(NamedConsumerStrategy);
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(PersistentSubscriptionSettings other) {
+      if (other == null) {
+        return;
+      }
+      if (other.ResolveLinkTos != false) {
+        ResolveLinkTos = other.ResolveLinkTos;
+      }
+      if (other.StartFrom != 0L) {
+        StartFrom = other.StartFrom;
+      }
+      if (other.ExtraStatistics != false) {
+        ExtraStatistics = other.ExtraStatistics;
+      }
+      if (other.MessageTimeout != 0D) {
+        MessageTimeout = other.MessageTimeout;
+      }
+      if (other.MaxRetryCount != 0) {
+        MaxRetryCount = other.MaxRetryCount;
+      }
+      if (other.LiveBufferSize != 0) {
+        LiveBufferSize = other.LiveBufferSize;
+      }
+      if (other.ReadBatchSize != 0) {
+        ReadBatchSize = other.ReadBatchSize;
+      }
+      if (other.HistoryBufferSize != 0) {
+        HistoryBufferSize = other.HistoryBufferSize;
+      }
+      if (other.CheckPointAfter != 0D) {
+        CheckPointAfter = other.CheckPointAfter;
+      }
+      if (other.MinCheckPointCount != 0) {
+        MinCheckPointCount = other.MinCheckPointCount;
+      }
+      if (other.MaxCheckPointCount != 0) {
+        MaxCheckPointCount = other.MaxCheckPointCount;
+      }
+      if (other.MaxSubscriberCount != 0) {
+        MaxSubscriberCount = other.MaxSubscriberCount;
+      }
+      if (other.NamedConsumerStrategy.Length != 0) {
+        NamedConsumerStrategy = other.NamedConsumerStrategy;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 8: {
+            ResolveLinkTos = input.ReadBool();
+            break;
+          }
+          case 16: {
+            StartFrom = input.ReadInt64();
+            break;
+          }
+          case 24: {
+            ExtraStatistics = input.ReadBool();
+            break;
+          }
+          case 33: {
+            MessageTimeout = input.ReadDouble();
+            break;
+          }
+          case 40: {
+            MaxRetryCount = input.ReadInt32();
+            break;
+          }
+          case 48: {
+            LiveBufferSize = input.ReadInt32();
+            break;
+          }
+          case 56: {
+            ReadBatchSize = input.ReadInt32();
+            break;
+          }
+          case 64: {
+            HistoryBufferSize = input.ReadInt32();
+            break;
+          }
+          case 73: {
+            CheckPointAfter = input.ReadDouble();
+            break;
+          }
+          case 80: {
+            MinCheckPointCount = input.ReadInt32();
+            break;
+          }
+          case 88: {
+            MaxCheckPointCount = input.ReadInt32();
+            break;
+          }
+          case 96: {
+            MaxSubscriberCount = input.ReadInt32();
+            break;
+          }
+          case 106: {
+            NamedConsumerStrategy = input.ReadString();
             break;
           }
         }
